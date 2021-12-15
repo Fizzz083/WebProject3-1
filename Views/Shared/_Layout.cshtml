@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MyWebApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+@{ 
+    string val = "Arman";
+    
+    if(ViewData["curName"]!=null){
+     val = ViewData["curName"].ToString();
+    }
+    Console.WriteLine(val);
+}
+<body>
+    <header>
+        <div style="background-color:black;text-align:center;height:220px; ">
+        <img  src= "~/Images/sgipc_C1.jpg" />
+        </div>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <!--
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MyWebApp</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                -->
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="width:40px;margin-left:-100px; margin-right=-200px;">
+                    <ul class="navbar-nav flex-grow-1" >
+                        <li class="nav-item" >
+                            <a class="btn"  asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn"  asp-area="" asp-controller="Home" asp-action="Index">Upcoming Contest</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn"  asp-area="" asp-controller="Home" asp-action="Index">Problem List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn" asp-area="" asp-controller="Home" asp-action="Privacy">About SGIPC</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn" asp-area="" asp-controller="Home" asp-action="Privacy">Resources</a>
+                        </li>
+                       
+
+                        @if( string.Compare(val, "Arman")==0)
+                        {
+
+
+                        <li class="nav-item" style="margin-left:600px;">
+                            <a class="btn" asp-area="" asp-controller="Users" asp-action="Create">Register</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a class="btn"  asp-area="" asp-controller="Users" asp-action="Login">Login</a>
+                        </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item" style="margin-left:600px;">
+                            <a class="btn" asp-area="" asp-controller="Users" asp-action="Details">@ViewData["curName"]</a>
+                             </li>
+                             <li class="nav-item" style="margin-left:2px;">
+                            <a class="btn" asp-area="" asp-controller="Users" asp-action="Logout">Logout</a>
+                             </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - MyWebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
