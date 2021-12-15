@@ -1,0 +1,52 @@
+@model IEnumerable<MyWebApp.Models.result>
+
+@{
+    var timee = DateTimeOffset.Now.ToUnixTimeSeconds();
+}
+
+<p>
+    <h3>Upcoming Contest</h3>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th></b>Id</th>
+            <th>Name</th>
+            <th>Duration</th>
+            <th>Start Time</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach ( var item in Model ) {
+    @if(item.startTimeSeconds!>= timee)
+    {
+        <tr>
+            <td>
+                @item.id
+            </td>
+            <td>
+                @item.name
+            </td>
+            <td>
+                @TimeSpan.FromSeconds(@item.durationSeconds)
+            </td>
+            <td>
+                @{
+                    
+                  //var time = TimeSpan.FromMilliseconds(@item.startTimeSeconds*1000) ;
+
+                    //var time__ = new DateTime(time.Ticks).ToLocalTime;
+
+                    var time__ = DateTimeOffset.FromUnixTimeSeconds(@item.startTimeSeconds).DateTime.ToLocalTime();
+                   
+            
+                    //DateTime dateTime = New DateTime (long.Parse(@item.durationSeconds));
+                }
+                @time__
+            </td> 
+        </tr>
+    }
+}
+    </tbody>
+</table>
+

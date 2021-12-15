@@ -362,3 +362,7 @@ E:\MyWebApp\obj\Debug\netcoreapp3.1\staticwebassets\MyWebApp.StaticWebAssets.xml
 E:\MyWebApp\obj\Debug\netcoreapp3.1\MyWebApp.dll
 E:\MyWebApp\obj\Debug\netcoreapp3.1\MyWebApp.pdb
 E:\MyWebApp\obj\Debug\netcoreapp3.1\MyWebApp.genruntimeconfig.cache
+E:\MyWebApp\bin\Debug\netcoreapp3.1\PagedList.dll
+E:\MyWebApp\bin\Debug\netcoreapp3.1\PagedList.Mvc.dll
+E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Contest\error_.cshtml.g.cs
+E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Contest\Index.cshtml.g.cs
