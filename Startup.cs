@@ -33,6 +33,9 @@ namespace MyWebApp
              services.AddDbContext<ImagesDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
+             services.AddDbContext<AddProblemsDbContext>(options =>
+                options.UseSqlite(
+                    Configuration.GetConnectionString("DefaultConnection")));
                     
             
             services.AddDistributedMemoryCache();

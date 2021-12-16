@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MyWebApp</title>
+    <title>@ViewData["Title"] - PandaCode</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -11,7 +11,7 @@
 @{ 
     string val = "Arman";
     
-    if(ViewData["curName"]!=null){
+    if(ViewData["curName"]!=null && ViewData["curName"]!="Arman"){
      val = ViewData["curName"].ToString();
     }
     Console.WriteLine(val);
@@ -39,7 +39,7 @@
                             <a class="btn"  asp-area="" asp-controller="Contest" asp-action="Index">Upcoming Contest</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn"  asp-area="" asp-controller="Home" asp-action="Index">Problem List</a>
+                            <a class="btn"  asp-area="" asp-controller="AddProblem" asp-action="Index">Problem List</a>
                         </li>
                         <li class="nav-item">
                             <a class="btn" asp-area="" asp-controller="Home" asp-action="Privacy">About SGIPC</a>

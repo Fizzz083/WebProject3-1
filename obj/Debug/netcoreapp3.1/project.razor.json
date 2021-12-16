@@ -14402,6 +14402,11 @@
   "RootNamespace": "MyWebApp",
   "Documents": [
     {
+      "FilePath": "e:\\MyWebApp\\Views\\AddProblem\\Error.cshtml",
+      "TargetPath": "Views\\AddProblem\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\MyWebApp\\Views\\_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
       "FileKind": "mvc"
@@ -14437,8 +14442,13 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "e:\\MyWebApp\\Views\\contest\\Index.cshtml",
-      "TargetPath": "Views\\contest\\Index.cshtml",
+      "FilePath": "e:\\MyWebApp\\Views\\Contest\\Index.cshtml",
+      "TargetPath": "Views\\Contest\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\MyWebApp\\Views\\AddProblem\\Create.cshtml",
+      "TargetPath": "Views\\AddProblem\\Create.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14457,8 +14467,8 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "e:\\MyWebApp\\Views\\contest\\error_.cshtml",
-      "TargetPath": "Views\\contest\\error_.cshtml",
+      "FilePath": "e:\\MyWebApp\\Views\\Contest\\error_.cshtml",
+      "TargetPath": "Views\\Contest\\error_.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14469,6 +14479,11 @@
     {
       "FilePath": "e:\\MyWebApp\\Views\\Users\\Index.cshtml",
       "TargetPath": "Views\\Users\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\MyWebApp\\Views\\AddProblem\\Index.cshtml",
+      "TargetPath": "Views\\AddProblem\\Index.cshtml",
       "FileKind": "mvc"
     },
     {

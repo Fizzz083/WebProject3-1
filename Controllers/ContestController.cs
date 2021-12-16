@@ -9,6 +9,14 @@ using Microsoft.Extensions.Logging;
 using MyWebApp.Models;
 using Newtonsoft.Json;
 
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using MyWebApp.Data;
+using Microsoft.AspNetCore.Http;
+using System.Security.Cryptography;
+using System.Text;
+using System.IO;
+
 namespace MyWebApp.Controllers
 {
     public class contestController : Controller
@@ -18,6 +26,9 @@ namespace MyWebApp.Controllers
 
         public IActionResult Index()
         {
+            string cookieValueFromReq = Request.Cookies["curName"];  
+            ViewData["curName"] = cookieValueFromReq;
+            
             var url = "https://codeforces.com/api/contest.list?gym=false";
 
 

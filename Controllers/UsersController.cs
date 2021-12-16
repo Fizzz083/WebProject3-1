@@ -40,6 +40,7 @@ namespace MyWebApp.Controllers
 
         public UsersController(UsersDbContext context, ImagesDbContext iContext)
         {
+            // ViewData["curName"] = HttpContext.Session.GetString("curName");
             _context = context;
             _iContext = iContext;
         }
@@ -47,15 +48,17 @@ namespace MyWebApp.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            ViewData["curName"] = HttpContext.Session.GetString("curName");
-            ViewData["curId"] = HttpContext.Session.GetInt32("curId");
+            string cookieValueFromReq = Request.Cookies["curName"];  
+            ViewData["curName"] = cookieValueFromReq;
+           // ViewData["curId"] = HttpContext.Session.GetInt32("curId");
             //ViewData["curId"]= helperClass.getUniqueId();
             return View(await _context._users.ToListAsync());
         }
 
         public async Task<IActionResult> Logout()
         {
-            HttpContext.Session.SetString("curName", "Arman");
+            Response.Cookies.Delete("curName");  
+           // HttpContext.Session.SetString("curName", "Arman");
             //   return 
             return RedirectToAction("Index", "Home");
 
@@ -64,8 +67,11 @@ namespace MyWebApp.Controllers
         // GET: Users/Details/5
         public async Task<IActionResult> Details()
         {
-            Console.WriteLine(ViewData["curName"]);
-            ViewData["curName"] = HttpContext.Session.GetString("curName");
+           
+            string cookieValueFromReq = Request.Cookies["curName"];  
+            ViewData["curName"] = cookieValueFromReq;
+             Console.WriteLine(ViewData["curName"]);
+            //ViewData["curName"] = HttpContext.Session.GetString("curName");
             if (ViewData["curName"] == null)
             {
                 Console.WriteLine("Calling the details");
@@ -144,11 +150,14 @@ namespace MyWebApp.Controllers
                 // _context.Add(userlog);
                 await _context.SaveChangesAsync();
 
-                HttpContext.Session.SetInt32("curId", users.UserId);
-                HttpContext.Session.SetString("curName", users.Name);
-                ViewData["curId"] = HttpContext.Session.GetInt32("curId");
-                ViewData["curName"] = HttpContext.Session.GetString
-                ("curName");
+                string cookieValueFromReq = Request.Cookies["curName"];  
+                 ViewData["curName"] = cookieValueFromReq;
+
+                // HttpContext.Session.SetInt32("curId", users.UserId);
+                // HttpContext.Session.SetString("curName", users.Name);
+                // ViewData["curId"] = HttpContext.Session.GetInt32("curId");
+                // ViewData["curName"] = HttpContext.Session.GetString
+                // ("curName");
 
                 return RedirectToAction(nameof(Index));
             }
@@ -181,7 +190,7 @@ namespace MyWebApp.Controllers
                     return View();
                 }
                 Console.WriteLine("FOund");
-                HttpContext.Session.SetString("curName", users.Name);
+                //HttpContext.Session.SetString("curName", users.Name);
                 //HttpContext.Session.SetString("curId", users.);
 
                 //return View();
@@ -191,7 +200,18 @@ namespace MyWebApp.Controllers
 
 
                 //ViewData["curId"] = HttpContext.Session.GetString("curId");
-                ViewData["curName"] = users.Name;
+                //ViewData["curName"] = users.Name;
+                CookieOptions option = new CookieOptions();
+                option.Expires = DateTime.Now.AddSeconds(3600);
+                Response.Cookies.Append("curName", users.Name, option);
+
+                 CookieOptions option2 = new CookieOptions();
+                option2.Expires = DateTime.Now.AddSeconds(3600);
+                Response.Cookies.Append("curid", "1", option2);
+
+                string cookieValueFromReq = Request.Cookies["curName"];  
+                ViewData["curName"] = cookieValueFromReq;
+
                 return RedirectToAction("Index", "Home");
 
                 //userloginController userloginController = new userloginController(_context);
@@ -286,9 +306,9 @@ namespace MyWebApp.Controllers
                         catch (DbUpdateConcurrencyException)
                         {
                             Console.WriteLine("Update images failes");
-                            
+
                             throw;
-                            
+
                         }
                     }
                     else

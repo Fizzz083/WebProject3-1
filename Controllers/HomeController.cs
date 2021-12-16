@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MyWebApp.Models;
 using Microsoft.AspNetCore.Http;
+using System.Web;  
 
 namespace MyWebApp.Controllers
 {
@@ -16,17 +17,40 @@ namespace MyWebApp.Controllers
 
         public HomeController(ILogger<HomeController> logger)
         {
+        //    HttpContext.Session.SetString("curName", "Arman");
+        //     var Reff = HttpContext.Session.GetString("curName") ;
+        //     if(Reff!=null)
+        //     {
+        //         ViewData["curName"] = Reff;
+        //     }
+        //     else
+        //     {
+                
+        //     }
+
+        
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-           // HttpContext.Session.SetInt32("curId",83);
+            
+
+           // string cookieidFromReq = Request.Cookies["curid"];
+           // if(cookieidFromReq!=null){ 
+                ViewData["curName"] =  Request.Cookies["curName"];
+          //  }
+            // HttpCookie userInfo = new HttpCookie("userInfo");
+            // userInfo["UserName"] = "Annathurai";
+            // userInfo["UserColor"] = "Black";
+            // userInfo.Expires.Add(new TimeSpan(0, 1, 0));
+            // Response.Cookies.Add(userInfo);
+            // HttpContext.Session.SetInt32("curId",83);
             //HttpContext.Session.SetString("curName","Arman");
 
-           // ViewData["curId"]=HttpContext.Session.GetInt32("curId");
-            ViewData["curName"]=HttpContext.Session.GetString("curName");
-          Console.WriteLine(HttpContext.Session.GetString("curName"));
+            // ViewData["curId"]=HttpContext.Session.GetInt32("curId");
+            // ViewData["curName"]=HttpContext.Session.GetString("curName");
+            // Console.WriteLine(HttpContext.Session.GetString("curName"));
             return View();
         }
 
