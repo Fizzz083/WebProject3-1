@@ -11,7 +11,7 @@
 @{ 
     string val = "Arman";
     
-    if(ViewData["curName"]!=null && ViewData["curName"]!="Arman"){
+    if(ViewData["curName"]!=null ){
      val = ViewData["curName"].ToString();
     }
     Console.WriteLine(val);

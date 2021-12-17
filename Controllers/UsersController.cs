@@ -206,8 +206,8 @@ namespace MyWebApp.Controllers
                 Console.WriteLine("Hello there..");
                 return RedirectToAction("Index", "Home");
             }
-            Console.WriteLine("Hello there..");
-            return RedirectToAction("Index", "Home");
+            //Console.WriteLine("Hello there..");
+            //return RedirectToAction("Index", "Home");
             // return RedirectToAction("./Views/Home/Index.cshtml");
             //return View();
         }
@@ -333,7 +333,7 @@ namespace MyWebApp.Controllers
                     }
                 }
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details));
             }
             // return RedirectToAction("./Views/Home/Index.cshtml");
             //Console.WriteLine("Hello ");
