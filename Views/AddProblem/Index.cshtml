@@ -6,6 +6,7 @@
 
 @using X.PagedList;
 @using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
 
 
@@ -62,16 +63,21 @@
 
 <br/>
 
-<div >
+<div>
 @Html.PagedListPager(Model, i => Url.Action("Index", "AddProblem", 
         new { i }),
-        new X.PagedList.Web.Common.PagedListRenderOptions 
+        new PagedListRenderOptions  
         {
-              LiElementClasses = new string[] { "page-item" },
-        PageClasses = new string[] { "page-link" }
+            LiElementClasses = new string[] { "page-item" },
+            PageClasses = new string[] { "page-link" }
         }
         )
 </div>
+
+<!-- div >
+       @Html.PagedListPager(Model, i => Url.Action("Index", new { i=i}),X.PagedList.Web.Common.PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+           new X.PagedList.Web.Common.AjaxOptions() {HttpMethod="GET",UpdateTargetId= "employee-grid" }))
+</div -->
 </div>
 
 <div>

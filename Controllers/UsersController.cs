@@ -96,13 +96,7 @@ namespace MyWebApp.Controllers
                 string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
                 ViewBag.ImageData = imageDataURL;
             }
-
-
-
-
-
             Console.Write("Founded user for showing the details..");
-
             return View(users);
         }
 
@@ -178,8 +172,6 @@ namespace MyWebApp.Controllers
             if (ModelState.IsValid)
             {
 
-
-
                 String checkPassword = Hashing.ToSha256(userlogin.Password);
 
                 var users = await _context._users
@@ -190,17 +182,7 @@ namespace MyWebApp.Controllers
                     return View();
                 }
                 Console.WriteLine("FOund");
-                //HttpContext.Session.SetString("curName", users.Name);
-                //HttpContext.Session.SetString("curId", users.);
-
-                //return View();
-
-                // baseuser_.cur_user=users.UserId;
-
-
-
-                //ViewData["curId"] = HttpContext.Session.GetString("curId");
-                //ViewData["curName"] = users.Name;
+              
                 CookieOptions option = new CookieOptions();
                 option.Expires = DateTime.Now.AddSeconds(3600);
                 Response.Cookies.Append("curName", users.Name, option);

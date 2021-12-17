@@ -14412,6 +14412,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\MyWebApp\\Views\\Admin\\TeacherDetails.cshtml",
+      "TargetPath": "Views\\Admin\\TeacherDetails.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\MyWebApp\\Views\\Users\\Login.cshtml",
       "TargetPath": "Views\\Users\\Login.cshtml",
       "FileKind": "mvc"
@@ -14434,6 +14439,11 @@
     {
       "FilePath": "e:\\MyWebApp\\Views\\Users\\Details.cshtml",
       "TargetPath": "Views\\Users\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\MyWebApp\\Views\\Admin\\AddTeacher.cshtml",
+      "TargetPath": "Views\\Admin\\AddTeacher.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14467,6 +14477,16 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\MyWebApp\\Views\\Admin\\TeacherEdit.cshtml",
+      "TargetPath": "Views\\Admin\\TeacherEdit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\MyWebApp\\Views\\Admin\\TeacherDelete.cshtml",
+      "TargetPath": "Views\\Admin\\TeacherDelete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\MyWebApp\\Views\\Contest\\error_.cshtml",
       "TargetPath": "Views\\Contest\\error_.cshtml",
       "FileKind": "mvc"
@@ -14489,6 +14509,11 @@
     {
       "FilePath": "e:\\MyWebApp\\Views\\Home\\Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\MyWebApp\\Views\\Admin\\Index.cshtml",
+      "TargetPath": "Views\\Admin\\Index.cshtml",
       "FileKind": "mvc"
     }
   ],

@@ -371,3 +371,8 @@ E:\MyWebApp\bin\Debug\netcoreapp3.1\JetBrains.Annotations.dll
 E:\MyWebApp\bin\Debug\netcoreapp3.1\X.PagedList.dll
 E:\MyWebApp\bin\Debug\netcoreapp3.1\X.PagedList.Mvc.dll
 E:\MyWebApp\bin\Debug\netcoreapp3.1\X.PagedList.Mvc.Core.dll
+E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AddTeacher.cshtml.g.cs
+E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Index.cshtml.g.cs
+E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\TeacherDetails.cshtml.g.cs
+E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\TeacherEdit.cshtml.g.cs
+E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\TeacherDelete.cshtml.g.cs

@@ -36,6 +36,9 @@ namespace MyWebApp
              services.AddDbContext<AddProblemsDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
+             services.AddDbContext<TeacherInfoDbContext>(options =>
+                options.UseSqlite(
+                    Configuration.GetConnectionString("DefaultConnection")));
                     
             
             services.AddDistributedMemoryCache();
