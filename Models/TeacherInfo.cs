@@ -42,5 +42,6 @@ namespace MyWebApp.Models
             public List<Notice> Notices { get; set; }
 
             public List<Team> Teams {get; set;}
+            public List<Archive> Archives {get;set;}
         }
 }

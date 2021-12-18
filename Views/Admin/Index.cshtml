@@ -142,6 +142,56 @@ else
 <br/>
 <hr class="rounded">
 
+ <h4  style="text-align:center">Archives</h4>
+@if(Model.Archives !=null)
+{
+   
+    <table>
+    <tr style="padding: 5px">
+        <th  style="padding: 15px" >Archive Id</th>
+        <th  style="padding: 15px" >Contest Name</th>
+        <th  style="padding: 15px" >Year</th>
+        <th  style="padding: 15px" >position</th>
+        @* <th  style="padding: 15px">Member 1</th>
+        <th  style="padding: 15px">Member 2</th>
+        <th  style="padding: 15px">Member 3</th> *@
+    </tr>
+    @foreach (Archive archive in Model.Archives)
+    {
+        <tr>
+            <td>@archive.AId</td>
+            <td>@archive.ContestName</td>
+            <td>@archive.Year</td>
+            <td>@archive.Position</td>
+            @* <td>@archive.Member1</td>
+            <td>@archive.Member2</td>
+            <td>@archive.Member3</td> *@
+            
+            <td  style="padding: 15px" >
+                <a asp-action="ArchiveEdit" asp-route-id="@archive.AId">Edit</a> |
+                <a asp-action="ArchiveDetails" asp-route-id="@archive.AId">Details</a> |
+                <a asp-action="ArchiveDelete" asp-route-id="@archive.AId">Delete</a>
+            </td>
+        </tr> 
+    }
+</table>
+
+}
+else
+{
+    <p>No Team is added</p>
+}
+
+<div>
+<p>
+    <a asp-action="AddArchive">Create New</a>
+</p>
+</div>
+
+<br/>
+<br/>
+<hr class="rounded">
+
 
 
 @section Scripts {

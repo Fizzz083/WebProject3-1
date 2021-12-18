@@ -31,7 +31,8 @@ namespace MyWebApp.Controllers
 
         public NoticeDbContext _nContext;
         public TeamDbContext _teContext;
-        public AdminController(UsersDbContext context, ImagesDbContext iContext, TeacherInfoDbContext tContext, AddProblemsDbContext pContext, NoticeDbContext nContext, TeamDbContext teContext)
+        public ArchiveDbContext _aContext;
+        public AdminController(UsersDbContext context, ImagesDbContext iContext, TeacherInfoDbContext tContext, AddProblemsDbContext pContext, NoticeDbContext nContext, TeamDbContext teContext, ArchiveDbContext aContext)
         {
             // ViewData["curName"] = HttpContext.Session.GetString("curName");
             _context = context;
@@ -40,6 +41,7 @@ namespace MyWebApp.Controllers
             _pContext = pContext;
             _nContext = nContext;
             _teContext = teContext;
+            _aContext = aContext;
         }
 
 
@@ -62,14 +64,16 @@ namespace MyWebApp.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-               var teachers_ = await _tContext._teachers.ToListAsync();
+            var teachers_ = await _tContext._teachers.ToListAsync();
             var notices_ = await _nContext._notices.ToListAsync();
             var teams_ = await _teContext._teams.ToListAsync();
+            var archive__ = await _aContext._archives.ToListAsync();
 
            CollectionDataModel model = new CollectionDataModel();
            model.Teachers = teachers_;
            model.Notices = notices_;
            model.Teams = teams_;
+           model.Archives =archive__;
             return View(model);
         }
 
@@ -647,6 +651,175 @@ namespace MyWebApp.Controllers
        
 
         /* .... end - Team .... */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         /* Archive */
+        public IActionResult AddArchive()
+        {
+            string cookieValueFromReq = Request.Cookies["curName"];
+            ViewData["curName"] = cookieValueFromReq;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> AddArchive([Bind("AId,TeamName,Member1,Member2,Member3,ContestName,Year,Position")] Archive archive)
+        {
+            if (ModelState.IsValid)
+            {
+
+                // var archive_ = await _aContext._archives
+                // .FirstOrDefaultAsync(m => m.TeamName == archive.TeamName);
+
+                
+
+                 _aContext.Add(archive);
+                await _aContext.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public async Task<IActionResult> ArchiveDelete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var archive_ = await _aContext._archives
+                 .FirstOrDefaultAsync(m => m.AId == id);
+            if (archive_ == null)
+            {
+                return NotFound();
+            }
+
+            return View(archive_);
+        }
+
+        // POST: Users/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> ArchiveDelete(int id)
+        {
+
+            Console.WriteLine("deleting teacher...");
+            var archive_ = await _aContext._archives
+                 .FirstOrDefaultAsync(m => m.AId == id);
+
+            if (archive_ != null)
+            {
+                Console.WriteLine("found teacher for delete...");
+                _aContext._archives.Remove(archive_);
+                await _tContext.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
+        }
+        
+        public async Task<IActionResult> ArchiveDetails(int? id)
+        {
+            var archive_ = await _aContext._archives
+                 .FirstOrDefaultAsync(m => m.AId == id);
+            if (archive_ == null)
+            {
+                Console.Write("Not Founded Teacher for showing the details..");
+                return NotFound();
+            }
+
+            
+            Console.Write("Founded Teacher for showing the details..");
+            return View(archive_);
+        }
+
+        public async Task<IActionResult> ArchiveEdit(int? id)
+        {
+            //ViewData["curName"] = HttpContext.Session.GetString("curName");
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+           var archive_ = await _aContext._archives
+                 .FirstOrDefaultAsync(m => m.AId == id);
+            if (archive_ == null)
+            {
+                return NotFound();
+            }
+            return View(archive_);
+        }
+
+        // POST: Users/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ArchiveEdit(int id, [Bind("AId,TeamName,Member1,Member2,Member3,ContestName,Year,Position")] Archive archive)
+        {
+            Console.WriteLine("teacher edit..");
+            if (id != archive.AId)
+            {
+                return NotFound();
+            }
+
+            var archive_ = await _aContext._archives.FindAsync(id);
+
+
+            archive_.ContestName = archive.ContestName;
+            archive_.TeamName = archive.TeamName;
+            archive_.Member1 = archive.Member1;
+            archive_.Member2 = archive.Member2;
+            archive_.Member3 = archive.Member3;
+            archive_.Year = archive.Year;
+            archive_.Position = archive.Position;
+
+
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //    users.Password = Hashing.ToSha256(users.Password);
+                    _aContext.Update(archive_);
+                    await _tContext.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (archive_==null)
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View(archive_);
+        }
+
+         /* Archive - End */
     
     }
 }

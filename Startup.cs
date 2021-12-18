@@ -45,6 +45,9 @@ namespace MyWebApp
             services.AddDbContext<TeamDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ArchiveDbContext>(options =>
+                options.UseSqlite(
+                    Configuration.GetConnectionString("DefaultConnection")));
                     
             
             services.AddDistributedMemoryCache();

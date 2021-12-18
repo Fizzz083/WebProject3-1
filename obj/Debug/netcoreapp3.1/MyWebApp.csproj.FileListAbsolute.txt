@@ -389,3 +389,7 @@ E:\MyWebApp\bin\Debug\netcoreapp3.1\System.IO.Packaging.dll
 E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AddTeam.cshtml.g.cs
 E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\TeamDelete.cshtml.g.cs
 E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\TeamEdit.cshtml.g.cs
+E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AddArchive.cshtml.g.cs
+E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\ArchiveDelete.cshtml.g.cs
+E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\ArchiveDetails.cshtml.g.cs
+E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\ArchiveEdit.cshtml.g.cs

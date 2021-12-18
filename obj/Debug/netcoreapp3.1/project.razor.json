@@ -14412,6 +14412,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\MyWebApp\\Views\\Admin\\ArchiveDelete.cshtml",
+      "TargetPath": "Views\\Admin\\ArchiveDelete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\MyWebApp\\Views\\Admin\\TeacherDetails.cshtml",
       "TargetPath": "Views\\Admin\\TeacherDetails.cshtml",
       "FileKind": "mvc"
@@ -14482,6 +14487,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\MyWebApp\\Views\\Admin\\ArchiveEdit.cshtml",
+      "TargetPath": "Views\\Admin\\ArchiveEdit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\MyWebApp\\Views\\Admin\\TeamDelete.cshtml",
       "TargetPath": "Views\\Admin\\TeamDelete.cshtml",
       "FileKind": "mvc"
@@ -14499,6 +14509,11 @@
     {
       "FilePath": "e:\\MyWebApp\\Views\\Admin\\AddTeam.cshtml",
       "TargetPath": "Views\\Admin\\AddTeam.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\MyWebApp\\Views\\Admin\\ArchiveDetails.cshtml",
+      "TargetPath": "Views\\Admin\\ArchiveDetails.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14524,6 +14539,11 @@
     {
       "FilePath": "e:\\MyWebApp\\Views\\Users\\Delete.cshtml",
       "TargetPath": "Views\\Users\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\MyWebApp\\Views\\Admin\\AddArchive.cshtml",
+      "TargetPath": "Views\\Admin\\AddArchive.cshtml",
       "FileKind": "mvc"
     },
     {
