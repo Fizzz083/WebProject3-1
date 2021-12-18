@@ -78,7 +78,12 @@ namespace MyWebApp.Controllers
                 return NotFound();
             }
 
-            var user = ViewData["curName"];
+            string user = ViewData["curName"].ToString();
+
+            if(user==null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
             var users = await _context._users
                 .FirstOrDefaultAsync(m => m.Name == user);

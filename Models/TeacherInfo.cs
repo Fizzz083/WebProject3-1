@@ -39,5 +39,6 @@ namespace MyWebApp.Models
     public class CollectionDataModel
         {
             public List<Teacher> Teachers { get; set; }
+            public List<Notice> Notices { get; set; }
         }
 }

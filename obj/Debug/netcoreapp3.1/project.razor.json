@@ -14417,8 +14417,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\MyWebApp\\Views\\Admin\\NoticeDetails.cshtml",
+      "TargetPath": "Views\\Admin\\NoticeDetails.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\MyWebApp\\Views\\Users\\Login.cshtml",
       "TargetPath": "Views\\Users\\Login.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\MyWebApp\\Views\\Admin\\NoticeEdit.cshtml",
+      "TargetPath": "Views\\Admin\\NoticeEdit.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14472,6 +14482,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\MyWebApp\\Views\\Admin\\AddNotice.cshtml",
+      "TargetPath": "Views\\Admin\\AddNotice.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\MyWebApp\\Views\\Home\\Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
       "FileKind": "mvc"
@@ -14514,6 +14529,11 @@
     {
       "FilePath": "e:\\MyWebApp\\Views\\Admin\\Index.cshtml",
       "TargetPath": "Views\\Admin\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\MyWebApp\\Views\\Admin\\NoticeDelete.cshtml",
+      "TargetPath": "Views\\Admin\\NoticeDelete.cshtml",
       "FileKind": "mvc"
     }
   ],

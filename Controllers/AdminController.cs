@@ -25,14 +25,17 @@ namespace MyWebApp.Controllers
 
         public AddProblemsDbContext _pContext;
 
-        public AdminController(UsersDbContext context, ImagesDbContext iContext, TeacherInfoDbContext tContext, AddProblemsDbContext pContext)
+        public NoticeDbContext _nContext;
+        public AdminController(UsersDbContext context, ImagesDbContext iContext, TeacherInfoDbContext tContext, AddProblemsDbContext pContext, NoticeDbContext nContext)
         {
             // ViewData["curName"] = HttpContext.Session.GetString("curName");
             _context = context;
             _iContext = iContext;
             _tContext = tContext;
             _pContext = pContext;
+            _nContext = nContext;
         }
+
 
         
 
@@ -53,18 +56,25 @@ namespace MyWebApp.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var teachers_ = await _tContext._teachers.ToListAsync();
+               var teachers_ = await _tContext._teachers.ToListAsync();
+            var notices_ = await _nContext._notices.ToListAsync();
 
            CollectionDataModel model = new CollectionDataModel();
            model.Teachers = teachers_;
-
-
+           model.Notices = notices_;
             return View(model);
         }
 
+
+
+
+
+
+
+
+        /* Teacher */
         public IActionResult AddTeacher()
         {
-
             string cookieValueFromReq = Request.Cookies["curName"];
             ViewData["curName"] = cookieValueFromReq;
             return View();
@@ -273,6 +283,179 @@ namespace MyWebApp.Controllers
             return View(users);
         }
 
+         /* Teacher - End */
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
+
+
+         /* Notice */
+        public IActionResult AddNotice()
+        {
+            string cookieValueFromReq = Request.Cookies["curName"];
+            ViewData["curName"] = cookieValueFromReq;
+
+
+            
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> AddNotice([Bind("NId,,ShortDescription,Description,Time")] Notice notice)
+        {
+            if (ModelState.IsValid)
+            {
+
+                DateTime now = DateTime.Now; 
+
+                notice.Time  = now.ToString();
+
+                 _nContext.Add(notice);
+                await _nContext.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public async Task<IActionResult> NoticeDelete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var notice = await _nContext._notices
+                .FirstOrDefaultAsync(m => m.NId == id);
+            if (notice == null)
+            {
+                return NotFound();
+            }
+
+            return View(notice);
+        }
+
+        // POST: Users/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> NoticeDelete(int id)
+        {
+
+            Console.WriteLine("deleting teacher...");
+            var notice = await _nContext._notices
+                .FirstOrDefaultAsync(m => m.NId == id);
+
+            if (notice != null)
+            {
+                Console.WriteLine("found teacher for delete...");
+                _nContext._notices.Remove(notice);
+                await _nContext.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
+        }
+        
+        public async Task<IActionResult> NoticeDetails(int? id)
+        {
+            var notice = await _nContext._notices
+                .FirstOrDefaultAsync(m => m.NId == id);
+            if (notice == null)
+            {
+                Console.Write("Not Founded Notice for showing the details..");
+                return NotFound();
+            }
+
+            //var img = await _iContext.__images.FirstOrDefaultAsync(m => m.ImageName == teacher.Name);
+
+            // if (img != null)
+            // {
+            //     string imageBase64Data = Convert.ToBase64String(img.Datafiles);
+            //     string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+            //     ViewBag.ImageData = imageDataURL;
+            // }
+            // Console.Write("Founded Teacher for showing the details..");
+            return View(notice);
+        }
+
+        public async Task<IActionResult> NoticeEdit(int? id)
+        {
+            //ViewData["curName"] = HttpContext.Session.GetString("curName");
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+           var notice = await _nContext._notices
+                .FirstOrDefaultAsync(m => m.NId == id);
+            if (notice == null)
+            {
+                return NotFound();
+            }
+            return View(notice);
+        }
+
+        // POST: Users/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> NoticeEdit(int id, [Bind("NId,ShortDescription,Description,Time")] Notice notice)
+        {
+            Console.WriteLine("teacher edit..");
+            if (id != notice.NId)
+            {
+                return NotFound();
+            }
+
+            var notice_ = await _nContext._notices.FindAsync(id);
+           
+
+            notice_.ShortDescription = notice.ShortDescription;
+            notice_.Description = notice.Description;
+
+            
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //    users.Password = Hashing.ToSha256(users.Password);
+                    _nContext.Update(notice_);
+                    await _nContext.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (notice_==null)
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View(notice_);
+        }
+
+         /* Teacher - End */
 
 
 

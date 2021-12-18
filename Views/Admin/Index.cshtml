@@ -1,13 +1,20 @@
 @model MyWebApp.Models.CollectionDataModel
 
+<style>
+    hr.rounded {
+  border-top: 8px solid #bbb;
+  border-radius: 5px;
+}
+</style>
 
-@if(Model !=null)
+@if(Model.Teachers !=null)
 {
-    <table>
+    <h4  style="text-align:center">Teacher info</h4>
+    <table >
     <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Email</th>
+        <th  style="padding: 15px"  >Id</th>
+        <th  style="padding: 15px"  >Name</th>
+        <th  style="padding: 15px" >Email</th>
     </tr>
     @foreach (Teacher teacher in Model.Teachers)
     {
@@ -15,7 +22,7 @@
             <td>@teacher.Id</td>
             <td>@teacher.FullName</td>
             <td>@teacher.Email</td>
-            <td>
+            <td  style="padding: 15px" >
                 <a asp-action="TeacherEdit" asp-route-id="@teacher.Id">Edit</a> |
                 <a asp-action="TeacherDetails" asp-route-id="@teacher.Id">Details</a> |
                 <a asp-action="TeacherDelete" asp-route-id="@teacher.Id">Delete</a>
@@ -35,3 +42,56 @@ else
     <a asp-action="AddTeacher">Create New</a>
 </p>
 </div>
+
+<br/>
+<br/>
+<hr class="rounded">
+
+
+@if(Model.Notices !=null)
+{
+    <h4  style="text-align:center">Notice</h4>
+    <table>
+    <tr style="padding: 5px">
+        <th  style="padding: 15px" >Id</th>
+        <th  style="padding: 15px" >Short Description</th>
+        <th  style="padding: 15px">Descriptin</th>
+        <th  style="padding: 15px">Time</th>
+    </tr>
+    @foreach (Notice notice in Model.Notices)
+    {
+        <tr>
+            <td>@notice.NId</td>
+            <td>@notice.ShortDescription</td>
+            <td>@notice.Description</td>
+            <td>@notice.Time</td>
+            <td  style="padding: 15px" >
+                <a asp-action="NoticeEdit" asp-route-id="@notice.NId">Edit</a> |
+                <a asp-action="NoticeDetails" asp-route-id="@notice.NId">Details</a> |
+                <a asp-action="NoticeDelete" asp-route-id="@notice.NId">Delete</a>
+            </td>
+        </tr> 
+    }
+</table>
+
+}
+else
+{
+    <p>No Notice is added</p>
+}
+
+<div>
+<p>
+    <a asp-action="AddNotice">Create New</a>
+</p>
+</div>
+
+<br/>
+<br/>
+<hr class="rounded">
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

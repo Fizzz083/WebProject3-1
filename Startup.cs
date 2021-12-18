@@ -27,16 +27,19 @@ namespace MyWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-             services.AddDbContext<UsersDbContext>(options =>
+            services.AddDbContext<UsersDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
-             services.AddDbContext<ImagesDbContext>(options =>
+            services.AddDbContext<ImagesDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
-             services.AddDbContext<AddProblemsDbContext>(options =>
+            services.AddDbContext<AddProblemsDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
-             services.AddDbContext<TeacherInfoDbContext>(options =>
+            services.AddDbContext<TeacherInfoDbContext>(options =>
+                options.UseSqlite(
+                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<NoticeDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
                     
