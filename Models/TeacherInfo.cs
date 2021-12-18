@@ -40,5 +40,7 @@ namespace MyWebApp.Models
         {
             public List<Teacher> Teachers { get; set; }
             public List<Notice> Notices { get; set; }
+
+            public List<Team> Teams {get; set;}
         }
 }

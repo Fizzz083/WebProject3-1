@@ -13,6 +13,10 @@ using System.Text;
 using System.IO;
 using X.PagedList;
 using X.PagedList.Mvc;
+using System.Data;
+using System.Data.OleDb;
+using System.Configuration;
+using ClosedXML;
 
 namespace MyWebApp.Controllers
 {
@@ -26,7 +30,8 @@ namespace MyWebApp.Controllers
         public AddProblemsDbContext _pContext;
 
         public NoticeDbContext _nContext;
-        public AdminController(UsersDbContext context, ImagesDbContext iContext, TeacherInfoDbContext tContext, AddProblemsDbContext pContext, NoticeDbContext nContext)
+        public TeamDbContext _teContext;
+        public AdminController(UsersDbContext context, ImagesDbContext iContext, TeacherInfoDbContext tContext, AddProblemsDbContext pContext, NoticeDbContext nContext, TeamDbContext teContext)
         {
             // ViewData["curName"] = HttpContext.Session.GetString("curName");
             _context = context;
@@ -34,6 +39,7 @@ namespace MyWebApp.Controllers
             _tContext = tContext;
             _pContext = pContext;
             _nContext = nContext;
+            _teContext = teContext;
         }
 
 
@@ -58,10 +64,12 @@ namespace MyWebApp.Controllers
 
                var teachers_ = await _tContext._teachers.ToListAsync();
             var notices_ = await _nContext._notices.ToListAsync();
+            var teams_ = await _teContext._teams.ToListAsync();
 
            CollectionDataModel model = new CollectionDataModel();
            model.Teachers = teachers_;
            model.Notices = notices_;
+           model.Teams = teams_;
             return View(model);
         }
 
@@ -455,9 +463,190 @@ namespace MyWebApp.Controllers
             return View(notice_);
         }
 
-         /* Teacher - End */
+         /* Notice - End */
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* .... Team ... */
+
+        public IActionResult AddTeam()
+        {
+            string cookieValueFromReq = Request.Cookies["curName"];
+            ViewData["curName"] = cookieValueFromReq;
+
+
+            
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> AddTeam([Bind("TId,TeamName,Member1,Member2,Member3,Email,Phonenumber")] Team team)
+        {
+            if (ModelState.IsValid)
+            {
+
+                
+                 _teContext.Add(team);
+                await _teContext.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public async Task<IActionResult> TeamDelete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var team_ = await _teContext._teams
+                .FirstOrDefaultAsync(m => m.TId == id);
+            if (team_ == null)
+            {
+                return NotFound();
+            }
+
+            return View(team_);
+        }
+
+        // POST: Users/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> TeamDelete(int id)
+        {
+
+            Console.WriteLine("deleting Team...");
+            var team_ = await _teContext._teams
+                .FirstOrDefaultAsync(m => m.TId == id);
+
+            if (team_ != null)
+            {
+                Console.WriteLine("found teacher for delete...");
+                _teContext._teams.Remove(team_);
+                await _teContext.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
+        }
+        
+        public async Task<IActionResult> TeamDetails(int? id)
+        {
+            var team_ = await _teContext._teams
+                .FirstOrDefaultAsync(m => m.TId == id);
+            if (team_ == null)
+            {
+               // Console.Write("Not Founded Notice for showing the details..");
+                return NotFound();
+            }
+
+            //var img = await _iContext.__images.FirstOrDefaultAsync(m => m.ImageName == teacher.Name);
+
+            // if (img != null)
+            // {
+            //     string imageBase64Data = Convert.ToBase64String(img.Datafiles);
+            //     string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+            //     ViewBag.ImageData = imageDataURL;
+            // }
+            // Console.Write("Founded Teacher for showing the details..");
+            return View(team_);
+        }
+
+        public async Task<IActionResult> TeamEdit(int? id)
+        {
+            //ViewData["curName"] = HttpContext.Session.GetString("curName");
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var team_ = await _teContext._teams
+                .FirstOrDefaultAsync(m => m.TId == id);
+            if (team_ == null)
+            {
+                return NotFound();
+            }
+            return View(team_);
+        }
+
+        // POST: Users/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> TeamEdit(int id, [Bind("TId,TeamName,Member1,Member2,Member3,Email,Phonenumber")] Team team)
+        {
+            Console.WriteLine("teacher edit..");
+            if (id != team.TId)
+            {
+                return NotFound();
+            }
+
+             var team_ = await _teContext._teams
+                .FirstOrDefaultAsync(m => m.TId == id);
+
+            team_.TeamName = team.TeamName;
+            team_.Member1 = team.Member1;
+            team_.Member2 = team.Member2;
+            team_.Member3 = team.Member3;
+            team_.Email = team.Email;
+            team_.Phonenumber = team.Phonenumber;
+            
+            
+           
+
+            // notice_.ShortDescription = notice.ShortDescription;
+            // notice_.Description = notice.Description;
+
+            
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //    users.Password = Hashing.ToSha256(users.Password);
+                    _teContext.Update(team_);
+                    await _teContext.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (team_==null)
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View(team_);
+        }
+       
+
+        /* .... end - Team .... */
+    
     }
 }

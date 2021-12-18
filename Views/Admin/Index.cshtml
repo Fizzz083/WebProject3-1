@@ -7,9 +7,11 @@
 }
 </style>
 
+
+   <h4  style="text-align:center">Teacher info</h4>
 @if(Model.Teachers !=null)
 {
-    <h4  style="text-align:center">Teacher info</h4>
+ 
     <table >
     <tr>
         <th  style="padding: 15px"  >Id</th>
@@ -48,9 +50,10 @@ else
 <hr class="rounded">
 
 
+<h4  style="text-align:center">Notice</h4>
 @if(Model.Notices !=null)
 {
-    <h4  style="text-align:center">Notice</h4>
+    
     <table>
     <tr style="padding: 5px">
         <th  style="padding: 15px" >Id</th>
@@ -90,8 +93,66 @@ else
 <br/>
 <hr class="rounded">
 
+ <h4  style="text-align:center">Teams</h4>
+@if(Model.Teams !=null)
+{
+   
+    <table>
+    <tr style="padding: 5px">
+        <th  style="padding: 15px" >Team Id</th>
+        <th  style="padding: 15px" >Team Name</th>
+        <th  style="padding: 15px">Member 1</th>
+        <th  style="padding: 15px">Member 2</th>
+        <th  style="padding: 15px">Member 3</th>
+        <th  style="padding: 15px">Email</th>
+        <th  style="padding: 15px">Phonenumber</th>
+    </tr>
+    @foreach (Team team in Model.Teams)
+    {
+        <tr>
+            <td>@team.TId</td>
+            <td>@team.TeamName</td>
+            <td>@team.Member1</td>
+            <td>@team.Member2</td>
+            <td>@team.Member3</td>
+            <td>@team.Email</td>
+            <td>@team.Phonenumber</td>
+            <td  style="padding: 15px" >
+                <a asp-action="TeamEdit" asp-route-id="@team.TId">Edit</a> |
+                @* <a asp-action="NoticeDetails" asp-route-id="@team.TId">Details</a> | *@
+                <a asp-action="TeamDelete" asp-route-id="@team.TId">Delete</a>
+            </td>
+        </tr> 
+    }
+</table>
+
+}
+else
+{
+    <p>No Team is added</p>
+}
+
+<div>
+<p>
+    <a asp-action="AddTeam">Create New</a>
+</p>
+</div>
+
+<br/>
+<br/>
+<hr class="rounded">
+
 
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+
+<style>
+    table,th,
+td {
+    border: 1px solid #333;
+    text-align: center;
+}
+</style>

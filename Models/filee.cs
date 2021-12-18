@@ -10,6 +10,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MyWebApp.Models;
 using Newtonsoft.Json;
+using System.IO;
+using ExcelDataReader;
+using System.Web;
+using Microsoft.AspNetCore.Http;
+using System.Security.Cryptography;
+
 
 
 namespace MyWebApp.Models
@@ -20,4 +26,6 @@ namespace MyWebApp.Models
 
         public IList<result> result {get;set;}
     }
+
+
 }

@@ -1,0 +1,61 @@
+@model MyWebApp.Models.Team
+
+@{
+    ViewData["Title"] = "Add Team";
+}
+
+<h1>Add Team</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddTeam">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TeamName" class="control-label"></label>
+                <input asp-for="TeamName" class="form-control" />
+                <span asp-validation-for="TeamName" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Member1" class="control-label"></label>
+                <input asp-for="Member1" class="form-control" />
+                <span asp-validation-for="Member1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Member2" class="control-label"></label>
+                <input asp-for="Member2" class="form-control" />
+                <span asp-validation-for="Member2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Member3" class="control-label"></label>
+                <input asp-for="Member3" class="form-control" />
+                <span asp-validation-for="Member3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phonenumber" class="control-label"></label>
+                <input asp-for="Phonenumber" class="form-control" />
+                <span asp-validation-for="Phonenumber" class="text-danger"></span>
+            </div>
+            
+
+            
+            
+            <div class="form-group">
+                <input type="submit" value="AddTeam" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

@@ -380,3 +380,12 @@ E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AddNotice.cshtml.g.cs
 E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\NoticeDelete.cshtml.g.cs
 E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\NoticeDetails.cshtml.g.cs
 E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\NoticeEdit.cshtml.g.cs
+E:\MyWebApp\bin\Debug\netcoreapp3.1\ClosedXML.dll
+E:\MyWebApp\bin\Debug\netcoreapp3.1\DocumentFormat.OpenXml.dll
+E:\MyWebApp\bin\Debug\netcoreapp3.1\ExcelDataReader.dll
+E:\MyWebApp\bin\Debug\netcoreapp3.1\ExcelDataReader.DataSet.dll
+E:\MyWebApp\bin\Debug\netcoreapp3.1\ExcelNumberFormat.dll
+E:\MyWebApp\bin\Debug\netcoreapp3.1\System.IO.Packaging.dll
+E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AddTeam.cshtml.g.cs
+E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\TeamDelete.cshtml.g.cs
+E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\TeamEdit.cshtml.g.cs
