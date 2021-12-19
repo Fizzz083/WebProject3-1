@@ -43,5 +43,7 @@ namespace MyWebApp.Models
 
             public List<Team> Teams {get; set;}
             public List<Archive> Archives {get;set;}
+
+            public List<ImageUp> Images {get;set;}
         }
 }

@@ -194,6 +194,64 @@ else
 
 
 
+ <h4  style="text-align:center">Home images</h4>
+@if(Model.Archives !=null)
+{
+   
+    <table>
+    <tr style="padding: 5px">
+        <th  style="padding: 15px" >Image Id</th>
+        <th  style="padding: 15px" >Image Name</th>
+        <th  style="padding: 15px" >Image</th>
+        @* <th  style="padding: 15px">Member 1</th>
+        <th  style="padding: 15px">Member 2</th>
+        <th  style="padding: 15px">Member 3</th> *@
+    </tr>
+    @foreach (ImageUp image in Model.Images)
+    {
+        @if(string.Compare(image.ImageName, "homeimage")==0)
+        {
+
+        
+        <tr>
+            <td>@image.ImageId</td>
+            <td>@image.ImageName</td>
+
+            @{
+               string imageBase64Data = Convert.ToBase64String(image.Datafiles);
+                string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+               var img = imageDataURL;
+            }
+
+            
+            <td> <img style="width: 100%;height: 100px;  object-fit: contain;" src="@img" /></td>
+            @* <td>@archive.Member1</td>
+            <td>@archive.Member2</td>
+            <td>@archive.Member3</td> *@
+            
+            <td  style="padding: 15px" >
+                @* <a asp-action="ArchiveEdit" asp-route-id="@archive.AId">Edit</a> | *@
+                @* <a asp-action="ArchiveDetails" asp-route-id="@archive.AId">Details</a> | *@
+                <a asp-action="HomeImageDelete" asp-route-id="@image.ImageId">Delete</a>
+            </td>
+        </tr> 
+    }
+    }
+</table>
+
+}
+else
+{
+    <p>No Team is added</p>
+}
+
+<div>
+<p>
+    <a asp-action="AddHomeImage">Create New</a>
+</p>
+</div>
+
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

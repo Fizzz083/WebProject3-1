@@ -1,8 +1,35 @@
-﻿@{
+﻿@model MyWebApp.Models.CollectionDataModel
+@{
     ViewData["Title"] = "Home Page";
 }
+
+
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<ul id="exampleSlider" class = "slideshow">
+
+    <h3 id = "show"> h</h3>
+
+    @foreach (ImageUp item in Model.Images)
+    {
+
+        <li>
+            
+        @{
+               string imageBase64Data = Convert.ToBase64String(item.Datafiles);
+                string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+               var imgs = imageDataURL;
+        }
+        <img class="img2" src="@imgs" alt="" /></li>
+    }
+    
+    <!--li><img class="img2" src="~/Images/1.jpg" alt="" /></li>
+    <li><img class="img2" src="~/Images/2.jpg" alt="" /></li>
+    <li><img class="img2" src="~/Images/3.jpg" alt="" /></li>
+    <li><img class="img2" src="~/Images/4.jpg" alt="" /></li-->
+    
+</ul>

@@ -26,9 +26,7 @@ namespace MyWebApp.Controllers
         public UsersDbContext _context;
         public ImagesDbContext _iContext;
         public TeacherInfoDbContext _tContext;
-
         public AddProblemsDbContext _pContext;
-
         public NoticeDbContext _nContext;
         public TeamDbContext _teContext;
         public ArchiveDbContext _aContext;
@@ -69,11 +67,20 @@ namespace MyWebApp.Controllers
             var teams_ = await _teContext._teams.ToListAsync();
             var archive__ = await _aContext._archives.ToListAsync();
 
+            var homeimage = "homeImage";
+
+            //var images_ =  _iContext.__images.Where(y => y.ImageName.Contains(homeimage)).ToList();
+
+            
+
+            var images_ = await _iContext.__images.ToListAsync();
+
            CollectionDataModel model = new CollectionDataModel();
            model.Teachers = teachers_;
            model.Notices = notices_;
            model.Teams = teams_;
            model.Archives =archive__;
+           model.Images = images_;
             return View(model);
         }
 
@@ -820,6 +827,122 @@ namespace MyWebApp.Controllers
         }
 
          /* Archive - End */
-    
+
+
+
+
+
+
+
+
+
+
+
+
+        /* home image */
+
+        public IActionResult AddHomeImage()
+        {
+            string cookieValueFromReq = Request.Cookies["curName"];
+            ViewData["curName"] = cookieValueFromReq;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> AddHomeImage(IFormFile files)
+        {
+            if (ModelState.IsValid)
+            {
+
+                // var archive_ = await _aContext._archives
+                // .FirstOrDefaultAsync(m => m.TeamName == archive.TeamName);
+
+                if (files != null)
+            {
+                Console.WriteLine("getting Image");
+                if (files.Length > 0)
+                {
+                    var str = "homeimage";
+                    var fileName = Path.GetFileName(files.FileName);
+                    var filext = Path.GetExtension(fileName);
+                    var newFileName = String.Concat(str, filext);
+                    var objfiles = new ImageUp()
+                    {
+                        ImageId = 0,
+                        ImageName = str
+                    };
+                    using (var target = new MemoryStream())
+                    {
+                        files.CopyTo(target);
+                        objfiles.Datafiles = target.ToArray();
+                    }
+
+                    
+
+                        _iContext.__images.Add(objfiles);
+                        _iContext.SaveChanges();
+                    
+                    Console.WriteLine("Image Uploaded..");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Not Found Images....");
+            }
+
+                
+
+                //  _aContext.Add(archive);
+                // await _aContext.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public async Task<IActionResult> HomeImageDelete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var image_ = await _iContext.__images
+                 .FirstOrDefaultAsync(m => m.ImageId == id);
+            if (image_ == null)
+            {
+                return NotFound();
+            }
+
+            return View(image_);
+        }
+
+        // POST: Users/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> HomeImageDelete(int id)
+        {
+
+            Console.WriteLine("deleting image...");
+            var image_ = await _iContext.__images
+                 .FirstOrDefaultAsync(m => m.ImageId == id);
+
+            if (image_ != null)
+            {
+                Console.WriteLine("found image for delete...");
+                _iContext.__images.Remove(image_);
+                await _iContext.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
+        }
+        
+
+
+         /* home image  end*/
     }
 }

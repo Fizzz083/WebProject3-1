@@ -8,6 +8,12 @@ using Microsoft.Extensions.Logging;
 using MyWebApp.Models;
 using Microsoft.AspNetCore.Http;
 using System.Web;  
+using MyWebApp.Data;
+
+using System.IO;
+using X.PagedList;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace MyWebApp.Controllers
 {
@@ -15,7 +21,9 @@ namespace MyWebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public ImagesDbContext _iContext;
+
+        public HomeController(ILogger<HomeController> logger, ImagesDbContext iContext)
         {
         //    HttpContext.Session.SetString("curName", "Arman");
         //     var Reff = HttpContext.Session.GetString("curName") ;
@@ -28,11 +36,11 @@ namespace MyWebApp.Controllers
                 
         //     }
 
-        
+            _iContext  = iContext;
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public  async Task<IActionResult>  Index()
         {
             
 
@@ -51,7 +59,25 @@ namespace MyWebApp.Controllers
             // ViewData["curId"]=HttpContext.Session.GetInt32("curId");
             // ViewData["curName"]=HttpContext.Session.GetString("curName");
             // Console.WriteLine(HttpContext.Session.GetString("curName"));
-            return View();
+
+            var image_ = await _iContext.__images.ToListAsync();
+            
+            
+
+            List<ImageUp> imageList = new List<ImageUp>();
+
+            foreach(ImageUp i in image_)
+            {
+                if(string.Compare(i.ImageName, "homeimage")==0)
+                {
+                    imageList.Add(i);
+                }
+            }
+
+           CollectionDataModel model = new CollectionDataModel();
+           model.Images = imageList;
+
+            return View(model);
         }
 
         public IActionResult Privacy()
