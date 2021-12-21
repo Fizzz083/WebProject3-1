@@ -5,31 +5,127 @@
 
 
 
-<div class="text-center">
+<!-- div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
 <ul id="exampleSlider" class = "slideshow">
 
-    <h3 id = "show"> h</h3>
-
-    @foreach (ImageUp item in Model.Images)
-    {
-
-        <li>
-            
-        @{
-               string imageBase64Data = Convert.ToBase64String(item.Datafiles);
-                string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
-               var imgs = imageDataURL;
-        }
-        <img class="img2" src="@imgs" alt="" /></li>
-    }
     
-    <!--li><img class="img2" src="~/Images/1.jpg" alt="" /></li>
+
+@foreach (ImageUp item in Model.Images)
+{
+
+            <li>
+
+        @{
+            string imageBase64Data = Convert.ToBase64String(item.Datafiles);
+            string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+            var imgs = imageDataURL;
+        }
+            <img class="img2" src="@imgs" alt="" /></li>
+}
+
+    <li><img class="img2" src="~/Images/1.jpg" alt="" /></li>
     <li><img class="img2" src="~/Images/2.jpg" alt="" /></li>
     <li><img class="img2" src="~/Images/3.jpg" alt="" /></li>
-    <li><img class="img2" src="~/Images/4.jpg" alt="" /></li-->
+    <li><img class="img2" src="~/Images/4.jpg" alt="" /></li>
+
+</ul -->
+
+<h5 id="show"></h5>
+<div class="slideshow-container" >
+
+    <!-- Full-width images with number and caption text -->
     
-</ul>
+
+        
+        @foreach (ImageUp item in Model.Images)
+        {
+
+           <div class="mySlides fadee">
+
+                @{
+                    string imageBase64Data = Convert.ToBase64String(item.Datafiles);
+                    string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+                    var imgs = imageDataURL;
+                }
+
+                
+                <img src="@imgs" style="height: 400px;width:100%">
+           </div>
+                
+            
+        }
+</div>
+<br>
+
+<div style="text-align:center">
+     @foreach (ImageUp item in Model.Images)
+        {
+            <span class="dot" ></span>
+        }
+</div>
+
+<br/>
+
+
+<h3 style="width:600px;margin-left: -50px;margin-top:20px;text-align: center;">About</h3>
+<div class="about">
+    <p>
+    Articles are found in many Indo-European languages, Semitic languages (only the definite article), and Polynesian languages; however, they are formally absent from many of the world's major languages including: Chinese, Japanese, Korean, Mongolian, many Turkic languages (incl. Tatar, Bashkir, Tuvan and Chuvash), many Uralic languages (incl. Finnic[a] and Saami languages), Indonesian, Hindi-Urdu, Punjabi, Tamil, the Baltic languages, the majority of Slavic languages, the Bantu languages (incl. Swahili) and Yoruba. In some languages that do have articles, such as some North Caucasian languages, the use of articles is optional; however, in others like English and German it is mandatory in all cases.
+
+Linguists believe the common ancestor of the Indo-European languages, Proto-Indo-European, did not have articles. Most of the languages in this family do not have definite or indefinite articles: there is no article in Latin or Sanskrit, nor in some modern Indo-European languages, such as the families of Slavic languages (except for Bulgarian and Macedonian, which are rather distinctive among the Slavic languages in their grammar, and some Northern Russian dialects[7]), Baltic languages and many Indo-Aryan languages. Although Classical Greek had a definite article (which has survived into Modern Greek and which bears strong functional resemblance to the German definite article, which it is related to), the earlier Homeric Greek used this article largely as a pronoun or demonstrative, whereas the earliest known form of Greek known as Mycenaean Greek did not have any articles. Articles developed independently in several language families.
+
+Not all languages have both definite and indefinite articles, and some languages have different types of definite and indefinite articles to distinguish finer shades of meaning: for example, French and Italian have a partitive article used for indefinite mass nouns, whereas Colognian has two distinct sets of definite articles indicating focus and uniqueness, and Macedonian uses definite articles in a demonstrative sense, with a tripartite distinction (proximal, medial, distal) based on distance from the speaker or interlocutor. The words this and that (and their plurals, these and those) can be understood in English as, ultimately, forms of the definite article the (whose declension in Old English included thaes, an ancestral form of this/that and these/those).
+
+In many languages, the form of the article may vary according to the gender, number, or case of its noun. In some languages the article may be the only indication of the case. Many languages do not use articles at all, and may use other ways of indicating old versus new information, such as topic–comment constructions.
+    </p>
+
+</div>
+
+
+<div class="tableheader">
+    <h3 style="text-align:center">Notice</h3>
+</div>
+
+
+<div class="fornotice" >
+    <p>
+       
+        @if(Model.Notices !=null)
+        {
+           
+        <div id="noticetable">
+        <ul >
+           
+             @foreach (Notice notice in Model.Notices)
+            {
+                    <li id="noticetabletr" style="background-color: azure;margin-right:20px;">
+                        
+                        <h6 style="width:200px;height:30px;margin-left:30px;">@notice.ShortDescription</h6>
+                        <p style="width:100px;height:30px;;margin-top:-40px;margin-left:300px;">@notice.Time</p>
+                        <p style="margin-left:30px;width: 400px;height:100%;margin-top:20px;">@notice.Description</p>
+
+                        @* <td>@notice.NId</td>
+                        <td>@notice.ShortDescription</td>
+                        <td>@notice.Description</td>
+                        <td>@notice.Time</td> *@
+                      
+                    </li>
+            }
+        </ul>
+        </div>
+
+            }
+            else
+            {
+                <p>No Notice is added</p>
+            }
+
+    </p>
+</div>
+
+
+<h4>to check</h4>

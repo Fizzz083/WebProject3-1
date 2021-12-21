@@ -22,8 +22,9 @@ namespace MyWebApp.Controllers
         private readonly ILogger<HomeController> _logger;
 
         public ImagesDbContext _iContext;
+        public NoticeDbContext _nContext;
 
-        public HomeController(ILogger<HomeController> logger, ImagesDbContext iContext)
+        public HomeController(ILogger<HomeController> logger, ImagesDbContext iContext, NoticeDbContext nContext)
         {
         //    HttpContext.Session.SetString("curName", "Arman");
         //     var Reff = HttpContext.Session.GetString("curName") ;
@@ -37,6 +38,7 @@ namespace MyWebApp.Controllers
         //     }
 
             _iContext  = iContext;
+            _nContext = nContext;
             _logger = logger;
         }
 
@@ -73,9 +75,12 @@ namespace MyWebApp.Controllers
                     imageList.Add(i);
                 }
             }
+            var noticeList = await _nContext._notices.ToListAsync();
 
            CollectionDataModel model = new CollectionDataModel();
            model.Images = imageList;
+           model.Notices = noticeList;
+
 
             return View(model);
         }

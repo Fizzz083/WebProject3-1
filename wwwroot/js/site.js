@@ -4,33 +4,27 @@
 // Write your JavaScript code.
 
 
+
 $(function () {
-    
-    /* SET PARAMETERS */
-    var change_img_time 	= 5000;	
-    var transition_speed	= 100;
-    
-    var simple_slideshow	= $("#exampleSlider"),
-        listItems 			= simple_slideshow.children('li'),
-        listLen				= listItems.length,
-        i 					= 0,
+    var slideIndex = 0;
+    showSlides();
 
-        
-		
-        changeList = function () {
-
-            document.getElementById("show").innerHTML = listLen;
-			listItems.eq(i).fadeOut(transition_speed, function () {
-				i += 1;
-				if (i === listLen) {
-					i = 0;
-				}
-				listItems.eq(i).fadeIn(transition_speed);
-			});
-
-        };
-		
-    listItems.not(':first').hide();
-    setInterval(changeList, change_img_time);
-	
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        document.getElementById("show").innerHTML = slideIndex;
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+          }
+          
+        if (slideIndex >= slides.length) { slideIndex = 0 }
+        slides[slideIndex].style.display = "block";
+        dots[slideIndex].className += " active";
+        setTimeout(showSlides, 3000); // Change image every 2 seconds
+    }
 });
