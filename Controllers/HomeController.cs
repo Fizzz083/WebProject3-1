@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MyWebApp.Models;
 using Microsoft.AspNetCore.Http;
-using System.Web;  
+using System.Web;
 using MyWebApp.Data;
+using System.Net;
+using Newtonsoft.Json;
 
 using System.IO;
 using X.PagedList;
@@ -23,63 +25,163 @@ namespace MyWebApp.Controllers
 
         public ImagesDbContext _iContext;
         public NoticeDbContext _nContext;
+        public UsersDbContext _uContext;
 
-        public HomeController(ILogger<HomeController> logger, ImagesDbContext iContext, NoticeDbContext nContext)
+        public static DateTime UnixTimeStampToDateTime(int unixTimeStamp)
         {
-        //    HttpContext.Session.SetString("curName", "Arman");
-        //     var Reff = HttpContext.Session.GetString("curName") ;
-        //     if(Reff!=null)
-        //     {
-        //         ViewData["curName"] = Reff;
-        //     }
-        //     else
-        //     {
-                
-        //     }
-
-            _iContext  = iContext;
-            _nContext = nContext;
-            _logger = logger;
+            // Unix timestamp is seconds past epoch
+            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            return dtDateTime;
         }
 
-        public  async Task<IActionResult>  Index()
+        List<publish_submission> func_for_user(string user_name)
         {
-            
+            List<publish_submission> a = new List<publish_submission>();
 
-           // string cookieidFromReq = Request.Cookies["curid"];
-           // if(cookieidFromReq!=null){ 
-                ViewData["curName"] =  Request.Cookies["curName"];
-          //  }
-            // HttpCookie userInfo = new HttpCookie("userInfo");
-            // userInfo["UserName"] = "Annathurai";
-            // userInfo["UserColor"] = "Black";
-            // userInfo.Expires.Add(new TimeSpan(0, 1, 0));
-            // Response.Cookies.Add(userInfo);
-            // HttpContext.Session.SetInt32("curId",83);
-            //HttpContext.Session.SetString("curName","Arman");
+            var url = "https://codeforces.com/api/user.status?handle=" + user_name + "&from=1&count=5";
 
-            // ViewData["curId"]=HttpContext.Session.GetInt32("curId");
-            // ViewData["curName"]=HttpContext.Session.GetString("curName");
-            // Console.WriteLine(HttpContext.Session.GetString("curName"));
+
+            try
+            {
+
+                var w = new WebClient();
+
+                string json_data = w.DownloadString(url);
+
+                if (json_data != null)
+                {
+
+                    for_submission con = JsonConvert.DeserializeObject<for_submission>(json_data);
+
+                    //ViewBag.m = con.result[1].id - 19;
+
+
+
+
+                    for (int i = 0; i < con.result.Count; i++)
+                    {
+                        publish_submission tmp = new publish_submission();
+
+                        tmp.user_name = user_name;
+                        tmp.problem_name = con.result[i].problem.name;
+                        tmp.problem_id = con.result[i].problem.index;
+                        tmp.contest_id = (con.result[i].contestId).ToString();
+                        tmp.verdict = con.result[i].verdict;
+                        DateTime dateTimeOffset = UnixTimeStampToDateTime(con.result[i].creationTimeSeconds);
+                        // Console.WriteLine(dateTimeOffset);
+                        tmp.time_ = dateTimeOffset.ToString();
+
+                        Console.Write(tmp.problem_name);
+                        Console.Write("  ");
+                        Console.WriteLine(tmp.user_name);
+
+
+
+                        a.Add(tmp);
+                    }
+                    Console.WriteLine(a.Count);
+                    return a;
+
+                }
+                else
+                {
+                    return a;
+
+                }
+            }
+            catch (Exception)
+            {
+                return a;
+            }
+        }
+
+        public HomeController(ILogger<HomeController> logger, ImagesDbContext iContext, NoticeDbContext nContext, UsersDbContext uContext)
+        {
+            //    HttpContext.Session.SetString("curName", "Arman");
+            //     var Reff = HttpContext.Session.GetString("curName") ;
+            //     if(Reff!=null)
+            //     {
+            //         ViewData["curName"] = Reff;
+            //     }
+            //     else
+            //     {
+
+            //     }
+
+            _iContext = iContext;
+            _nContext = nContext;
+            _logger = logger;
+            _uContext = uContext;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+
+            ViewData["curName"] = Request.Cookies["curName"];
 
             var image_ = await _iContext.__images.ToListAsync();
-            
-            
+
+
 
             List<ImageUp> imageList = new List<ImageUp>();
 
-            foreach(ImageUp i in image_)
+            foreach (ImageUp i in image_)
             {
-                if(string.Compare(i.ImageName, "homeimage")==0)
+                if (string.Compare(i.ImageName, "homeimage") == 0)
                 {
                     imageList.Add(i);
                 }
             }
+
+            var all_user = await _uContext._users.ToListAsync();
+
+            List<publish_submission> problems_running = new List<publish_submission>();
+
+            if (all_user != null)
+                foreach (Users u in all_user)
+                {
+                    if (u.CfId == null) continue;
+                    List<publish_submission> u_problems_running = new List<publish_submission>();
+                    u_problems_running = func_for_user(u.CfId);
+
+
+
+                    foreach (publish_submission p in u_problems_running)
+                    {
+
+                        Console.Write(p.problem_name);
+                        Console.Write("  ");
+                        Console.WriteLine(p.user_name);
+
+
+                        problems_running.Add(p);
+                    }
+                }
+
+            Console.WriteLine(problems_running.Count);
+
+
+            problems_running.Sort(
+                delegate (publish_submission p1, publish_submission p2)
+                {
+                    return p1.time_.CompareTo(p2.time_);
+                }
+            );
+
+
+
+
+
+
+
+
             var noticeList = await _nContext._notices.ToListAsync();
 
-           CollectionDataModel model = new CollectionDataModel();
-           model.Images = imageList;
-           model.Notices = noticeList;
+            CollectionDataModel model = new CollectionDataModel();
+            model.Images = imageList;
+            model.Notices = noticeList;
+            model.Publish_submission = problems_running;
 
 
             return View(model);

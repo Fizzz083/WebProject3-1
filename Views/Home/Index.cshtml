@@ -91,18 +91,20 @@ In many languages, the form of the article may vary according to the gender, num
 </div>
 
 
-<div class="fornotice" >
+<div class="fornotice" style="background-color: aquamarine;" >
     <p>
        
         @if(Model.Notices !=null)
         {
            
-        <div id="noticetable">
+        
+        <div id="noticetable" style="background-color: aquamarine;">
+            <marquee direction="up" scrolldelay="1" onmouseover="this.stop();" onmouseout="this.start();">
         <ul >
            
              @foreach (Notice notice in Model.Notices)
             {
-                    <li id="noticetabletr" style="background-color: azure;margin-right:20px;">
+                    <li id="noticetabletr" style=" background-color: azure;;margin-right:20px;">
                         
                         <h6 style="width:200px;height:30px;margin-left:30px;">@notice.ShortDescription</h6>
                         <p style="width:100px;height:30px;;margin-top:-40px;margin-left:300px;">@notice.Time</p>
@@ -116,6 +118,7 @@ In many languages, the form of the article may vary according to the gender, num
                     </li>
             }
         </ul>
+        </marquee>
         </div>
 
             }
@@ -128,4 +131,44 @@ In many languages, the form of the article may vary according to the gender, num
 </div>
 
 
-<h4>to check</h4>
+<div class="running_problems">
+
+<h4  style="text-align:center">Teacher info</h4>
+@if(Model.Publish_submission !=null)
+{
+ 
+    <table >
+    <tr>
+        <th  style="padding: 15px"  >Name</th>
+        <th  style="padding: 15px"  >Problem Name</th>
+        <th  style="padding: 15px" >Time</th>
+        <th  style="padding: 15px" >Verdict</th>
+        <th  style="padding: 15px" >Problem Id</th>
+
+    </tr>
+    @foreach (publish_submission ps in Model.Publish_submission)
+    {
+        <tr >
+            <td>@ps.user_name</td>
+            <td>@ps.problem_name</td>
+            <td>@ps.time_</td>
+            <td>@ps.verdict</td>
+            <td>
+                @{
+                    string url =   "https://codeforces.com/problemset/problem/"+@ps.contest_id+"/"+@ps.problem_id;
+
+                }
+                <a href= @url>
+                    @ps.contest_id @ps.problem_id
+            </td>
+        </tr> 
+    }
+</table>
+
+}
+else
+{
+    <p>No problem is found</p>
+}
+
+</div>

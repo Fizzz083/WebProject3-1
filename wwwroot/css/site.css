@@ -240,7 +240,7 @@ img {vertical-align: middle;}
   width: 580px;
   height: 280px;
   overflow: auto;
-  background-color: #1E62D0;
+  background-color: aquamarine;
    margin-left: 600px;
    margin-top: -300px; 
 }
@@ -254,11 +254,12 @@ img {vertical-align: middle;}
 }
 
 .noticetable{
+  background-color: aquamarine;
   
 }
 
 .noticetabletr{
-  background-color: #337FED;
+  background-color: aquamarine;
   border-radius: 3rem;
 }
 
@@ -284,7 +285,7 @@ img {vertical-align: middle;}
 }
 
 .cardfornotice{
-  background-color: #337FED;
+  background-color: aquamarine;
   border-radius: 3rem;
 }
 

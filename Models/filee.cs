@@ -27,5 +27,6 @@ namespace MyWebApp.Models
         public IList<result> result {get;set;}
     }
 
+   
 
 }

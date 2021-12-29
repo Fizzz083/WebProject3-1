@@ -45,5 +45,7 @@ namespace MyWebApp.Models
             public List<Archive> Archives {get;set;}
 
             public List<ImageUp> Images {get;set;}
+
+            public List<publish_submission> Publish_submission {get;set;}
         }
 }
