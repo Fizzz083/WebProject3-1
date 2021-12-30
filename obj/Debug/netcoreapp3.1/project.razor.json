@@ -14552,6 +14552,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\MyWebApp\\Views\\ClubInfo\\Index.cshtml",
+      "TargetPath": "Views\\ClubInfo\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\MyWebApp\\Views\\Admin\\AddArchive.cshtml",
       "TargetPath": "Views\\Admin\\AddArchive.cshtml",
       "FileKind": "mvc"

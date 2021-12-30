@@ -36,6 +36,14 @@ namespace MyWebApp.Models
         public string PhoneNUmber { get; set; }
     }
 
+
+    public class UserWithRating
+    {
+        public Users users {get;set;}
+        public int rating { get;set;}
+
+    }
+
     public class CollectionDataModel
         {
             public List<Teacher> Teachers { get; set; }
@@ -47,5 +55,8 @@ namespace MyWebApp.Models
             public List<ImageUp> Images {get;set;}
 
             public List<publish_submission> Publish_submission {get;set;}
+
+            public List<UserWithRating> usersWithRating{get;set;}
+
         }
 }

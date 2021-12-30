@@ -395,3 +395,4 @@ E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\ArchiveDetails.cshtml.g.cs
 E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\ArchiveEdit.cshtml.g.cs
 E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AddHomeImage.cshtml.g.cs
 E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\HomeImageDelete.cshtml.g.cs
+E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\ClubInfo\Index.cshtml.g.cs
