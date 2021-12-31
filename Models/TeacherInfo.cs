@@ -58,5 +58,7 @@ namespace MyWebApp.Models
 
             public List<UserWithRating> usersWithRating{get;set;}
 
+             public List<Resource> Resources {get;set;}
+
         }
 }

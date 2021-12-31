@@ -1,0 +1,58 @@
+@model MyWebApp.Models.Resource
+
+@{
+    ViewData["Title"] = "Add Resource";
+}
+
+<h1>Add resource</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddResource">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ShortDescription" class="control-label"></label>
+                <input asp-for="ShortDescription" class="form-control" />
+                <span asp-validation-for="ShortDescription" class="text-danger"></span>
+            </div>
+        
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Topic" class="control-label"></label>
+                <input asp-for="Topic" class="form-control" />
+                <span asp-validation-for="Topic" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Datafiles" type="hidden" class="form-control" />
+                <span asp-validation-for="Datafiles" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="AddedBy" type="hidden" class="form-control" />
+                <span asp-validation-for="AddedBy" class="text-danger"></span>
+            </div>
+            
+             <div class="form-group">
+                <p>Upload Pdf/Doc </p>
+                <input name="files" type="file" class="form-control" />
+            </div>
+
+            
+            
+            <div class="form-group">
+                <input type="submit" value="AddResource" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

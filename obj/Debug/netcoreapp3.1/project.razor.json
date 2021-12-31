@@ -14447,6 +14447,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\MyWebApp\\Views\\Resource\\Index.cshtml",
+      "TargetPath": "Views\\Resource\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\MyWebApp\\Views\\Users\\Create.cshtml",
       "TargetPath": "Views\\Users\\Create.cshtml",
       "FileKind": "mvc"
@@ -14494,6 +14499,11 @@
     {
       "FilePath": "e:\\MyWebApp\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\MyWebApp\\Views\\Resource\\AddResource.cshtml",
+      "TargetPath": "Views\\Resource\\AddResource.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14559,6 +14569,11 @@
     {
       "FilePath": "e:\\MyWebApp\\Views\\Admin\\AddArchive.cshtml",
       "TargetPath": "Views\\Admin\\AddArchive.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\MyWebApp\\Views\\Resource\\ResourceDetails.cshtml",
+      "TargetPath": "Views\\Resource\\ResourceDetails.cshtml",
       "FileKind": "mvc"
     },
     {

@@ -1,0 +1,41 @@
+
+@model MyWebApp.Models.CollectionDataModel
+@{
+    ViewData["Title"] = "Resource Page";
+}
+
+<div>
+    
+<h4  style="text-align:center">Resource info</h4>
+@if(Model.Resources !=null)
+{
+ 
+    <table >
+    <tr>
+        <th  style="padding: 15px"  >Topic</th>
+        <th  style="padding: 15px"  >Short Description</th>
+        <th  style="padding: 15px" >Added By</th>
+
+    </tr>
+    @foreach (Resource ps in Model.Resources)
+    {
+        <tr >
+            <td>@ps.Topic</td>
+            <td>@ps.ShortDescription</td>
+            <td>@ps.AddedBy</td>
+            <td>
+                 <a asp-action="ResourceDetails" asp-route-id="@ps.RId">Details</a> |
+            </td>
+        </tr> 
+    }
+</table>
+
+}
+else
+{
+    <p>Not found any resource</p>
+}
+
+<a asp-action="AddResource">Add new</a> |
+
+</div>

@@ -1,0 +1,64 @@
+@model MyWebApp.Models.Resource
+
+@{
+    ViewData["Title"] = "resource Details";
+}
+
+<h1>Resource Details</h1>
+
+
+<div>
+            
+    <!-- h4>Users</h4 -->
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ShortDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ShortDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Topic)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Topic)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Datafiles)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Datafiles)
+
+            @if(Model.Datafiles!=null)
+            {
+                <p>Not null</p>
+            }
+            else
+            {
+                <p> null</p>
+            }
+        </dd>
+        
+    </dl>
+</div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
