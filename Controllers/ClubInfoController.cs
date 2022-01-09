@@ -19,6 +19,10 @@ using System.Configuration;
 using ClosedXML;
 
 
+using System.Net;
+using Newtonsoft.Json;
+
+
 namespace MyWebApp.Controllers
 {
     public class ClubInfoController : Controller
@@ -43,12 +47,12 @@ namespace MyWebApp.Controllers
             _aContext = aContext;
         }
 
-        int getRating(string cfid)
+        int getRating(string cfid_)
         {
             int ret = 0;
 
-            /*
-            var url = "https://codeforces.com/api/user.status?handle=" + user_name + "&from=1&count=5";
+            
+            var url = "https://codeforces.com/api/user.info?handles="+cfid_;
 
 
             try
@@ -61,31 +65,36 @@ namespace MyWebApp.Controllers
                 if (json_data != null)
                 {
 
-                    for_submission con = JsonConvert.DeserializeObject<for_submission>(json_data);
+                    UserRating con = JsonConvert.DeserializeObject<UserRating>(json_data);
+
+                    var r = con.result[0].rating;
+
 
                     //ViewBag.m = con.result[1].id - 
-                    Console.WriteLine(a.Count);
-                    return a;
+                   // Console.WriteLine(a.Count);
+                    return r;
 
                 }
                 else
                 {
-                    return a;
+                    return -1;
 
                 }
             }
             catch (Exception)
             {
-                return a;
+                return -1;
             }
-            */
+            
 
-            return ret;
+            //return ret;
         }
 
 
         public async Task<IActionResult> Index()
         {
+
+            ViewData["curName"] = Request.Cookies["curName"];
             CollectionDataModel model = new CollectionDataModel();
 
             var teachers_ = await _tContext._teachers.ToListAsync();
@@ -98,8 +107,8 @@ namespace MyWebApp.Controllers
             model.Archives = archive__;
 
             List<UserWithRating> UWR = new List<UserWithRating>();
-            
-            foreach( Users u in users_)
+
+            foreach (Users u in users_)
             {
                 UserWithRating uw = new UserWithRating();
 
@@ -119,3 +128,31 @@ namespace MyWebApp.Controllers
 
     }
 }
+
+
+
+
+/*
+
+{ "status":"OK",
+    "result": [
+                {   "lastName":"Arman",
+                    "country":"Bangladesh",
+                    "lastOnlineTimeSeconds":1641738962,
+                    "city":"Chittagong",
+                    "rating":1493,
+                    "friendOfCount":212,
+                    "titlePhoto":"https://userpic.codeforces.org/675389/title/1410a22b05eec03f.jpg",
+                    "handle":"AngryBaymax",
+                    "avatar":"https://userpic.codeforces.org/675389/avatar/f7ee98abd7b5b69c.jpg",
+                    "firstName":"Md. Mustafizur Rahman",
+                    "contribution":0,
+                    "organization":"KUET",
+                    "rank":"specialist",
+                    "maxRating":1687,
+                    "registrationTimeSeconds":1513780765,
+                    "email":"mdmustafiz7676@gmail.com",
+                    "maxRank":"expert"}]}
+
+
+                    */

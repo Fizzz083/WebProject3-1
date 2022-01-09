@@ -51,4 +51,23 @@ namespace MyWebApp.Models
         public string CodechefId{get;set;}
 
     }
+
+
+    public class UserRating_
+    {
+        public int rating {get;set;}
+        public int friendOfCount {get;set;}
+        public string maxRank {get;set;}
+        public string  rank {get;set;}
+        public string  organization {get;set;}
+    }
+
+
+
+    public class UserRating
+    {
+        public string status{get;set;}
+        public List<UserRating_>result{get;set;}
+
+    }
 }
