@@ -12,7 +12,7 @@ $(function () {
     function showSlides() {
         var i;
         var slides = document.getElementsByClassName("mySlides");
-        document.getElementById("show").innerHTML = slideIndex;
+        //document.getElementById("show").innerHTML = slideIndex;
         var dots = document.getElementsByClassName("dot");
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
@@ -28,3 +28,10 @@ $(function () {
         setTimeout(showSlides, 3000); // Change image every 2 seconds
     }
 });
+
+// $(function () {
+
+//     var clickedTR = $(this) ; // the tr you clicked on
+//   alert(clickedTR.attr('verdict'));
+//   clickedTR.css('background', 'red'); 
+// });

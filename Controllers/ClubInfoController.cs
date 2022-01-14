@@ -49,7 +49,7 @@ namespace MyWebApp.Controllers
 
         int getRating(string cfid_)
         {
-            int ret = 0;
+            //int ret = 0;
 
             
             var url = "https://codeforces.com/api/user.info?handles="+cfid_;

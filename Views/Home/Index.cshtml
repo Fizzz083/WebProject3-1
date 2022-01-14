@@ -12,19 +12,19 @@
 
 <ul id="exampleSlider" class = "slideshow">
 
-    
+
 
 @foreach (ImageUp item in Model.Images)
 {
 
-            <li>
+                <li>
 
         @{
             string imageBase64Data = Convert.ToBase64String(item.Datafiles);
             string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
             var imgs = imageDataURL;
         }
-            <img class="img2" src="@imgs" alt="" /></li>
+                <img class="img2" src="@imgs" alt="" /></li>
 }
 
     <li><img class="img2" src="~/Images/1.jpg" alt="" /></li>
@@ -34,142 +34,207 @@
 
 </ul -->
 
-<h5 id="show"></h5>
-<div class="slideshow-container" >
+@if (Model.Notices != null)
+{
+    <div id="noticetable" style="background-color: aquamarine;">
 
-    <!-- Full-width images with number and caption text -->
-    
-
-        
-        @foreach (ImageUp item in Model.Images)
-        {
-
-           <div class="mySlides fadee">
-
+        <marquee style="background-color: transparent;" direction="left" scrolldelay="10" onmouseover="this.stop();"
+        hspace="120" loop="infinite" onmouseout="this.start();">
+            <ul>
                 @{
-                    string imageBase64Data = Convert.ToBase64String(item.Datafiles);
-                    string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
-                    var imgs = imageDataURL;
+                    Notice notice = Model.Notices[0];
+
                 }
 
-                
-                <img src="@imgs" style="height: 400px;width:100%">
-           </div>
-                
-            
-        }
+                @* @foreach (Notice notice in Model.Notices) *@
+
+                <li id="noticetabletrr" style="margin-top:5px;margin-right:20px;">
+
+                    <p style="width:200px;height:18px;"> <b>@notice.ShortDescription :</b> @notice.Description </p>
+
+
+                    @* <td>@notice.NId</td>
+                        <td>@notice.ShortDescription</td>
+                        <td>@notice.Description</td>
+                        <td>@notice.Time</td> *@
+
+                </li>
+
+
+            </ul>
+        </marquee>
+    </div>
+
+}
+
+<h5 id="show"></h5>
+<div class="slideshow-container">
+
+    <!-- Full-width images with number and caption text -->
+
+
+
+    @foreach (ImageUp item in Model.Images)
+    {
+
+        <div class="mySlides fadee">
+
+            @{
+                string imageBase64Data = Convert.ToBase64String(item.Datafiles);
+                string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+                var imgs = imageDataURL;
+            }
+
+
+            <img src="@imgs" style="height: 400px;width:100%">
+        </div>
+
+
+    }
 </div>
 <br>
 
 <div style="text-align:center">
-     @foreach (ImageUp item in Model.Images)
-        {
-            <span class="dot" ></span>
-        }
+    @foreach (ImageUp item in Model.Images)
+    {
+        <span class="dot"></span>
+    }
 </div>
 
-<br/>
+<br />
+
+<div class="aboutmain">
 
 
-<h3 style="width:600px;margin-left: -50px;margin-top:20px;text-align: center;">About</h3>
-<div class="about">
-    <p>
-    Articles are found in many Indo-European languages, Semitic languages (only the definite article), and Polynesian languages; however, they are formally absent from many of the world's major languages including: Chinese, Japanese, Korean, Mongolian, many Turkic languages (incl. Tatar, Bashkir, Tuvan and Chuvash), many Uralic languages (incl. Finnic[a] and Saami languages), Indonesian, Hindi-Urdu, Punjabi, Tamil, the Baltic languages, the majority of Slavic languages, the Bantu languages (incl. Swahili) and Yoruba. In some languages that do have articles, such as some North Caucasian languages, the use of articles is optional; however, in others like English and German it is mandatory in all cases.
+    <div class="about">
+        <h1 style="color: aliceblue;">About SGIPC</h1>
+        <p style="font-size: 15px;color: antiquewhite;">
 
-Linguists believe the common ancestor of the Indo-European languages, Proto-Indo-European, did not have articles. Most of the languages in this family do not have definite or indefinite articles: there is no article in Latin or Sanskrit, nor in some modern Indo-European languages, such as the families of Slavic languages (except for Bulgarian and Macedonian, which are rather distinctive among the Slavic languages in their grammar, and some Northern Russian dialects[7]), Baltic languages and many Indo-Aryan languages. Although Classical Greek had a definite article (which has survived into Modern Greek and which bears strong functional resemblance to the German definite article, which it is related to), the earlier Homeric Greek used this article largely as a pronoun or demonstrative, whereas the earliest known form of Greek known as Mycenaean Greek did not have any articles. Articles developed independently in several language families.
+            Welcome, to the programming group of <a href="https://www.kuet.ac.bd/"><b>Khulna University of Engineering &
+                    Technology</b></a>. It is a group which is specially created for programmer students who are
+            interested in programming specially ACM solve, NCPC programming contest, University programming contest and
+            etc.
+            SGIPC means Special Group of Interest in Programming Contest. It is mainly a group of programmers who are
+            developing their programming skills by learning, solving, practicing & teaching others different types of
+            problems.
 
-Not all languages have both definite and indefinite articles, and some languages have different types of definite and indefinite articles to distinguish finer shades of meaning: for example, French and Italian have a partitive article used for indefinite mass nouns, whereas Colognian has two distinct sets of definite articles indicating focus and uniqueness, and Macedonian uses definite articles in a demonstrative sense, with a tripartite distinction (proximal, medial, distal) based on distance from the speaker or interlocutor. The words this and that (and their plurals, these and those) can be understood in English as, ultimately, forms of the definite article the (whose declension in Old English included thaes, an ancestral form of this/that and these/those).
+            This group also organize different programming contest as single and group or team. It has already organized
+            many contests and sends teams to National contest NCPC and different university festivals programming
+            contests.
 
-In many languages, the form of the article may vary according to the gender, number, or case of its noun. In some languages the article may be the only indication of the case. Many languages do not use articles at all, and may use other ways of indicating old versus new information, such as topic–comment constructions.
-    </p>
+            If you have any interest on programming and you have already learned basic programming language, you are
+            mostly invited to our programming group.
+
+            We are already started to teach the student of schools and colleges who are interested on programming.
+
+            If you have any questions about SGIPC, please mail us to <i>sgipckuet01@gmail.com</i>
+        </p>
+
+    </div>
+    <div style="margin-top: 80px; margin-left: 40px; text-align: center; ">
+        <img style=" border-radius:3px; text-align: center; width: 300px;" src="~/Images/aboutimg2.jpg" />
+    </div>
 
 </div>
-
-
-<div class="tableheader">
+<!--div class="tableheader">
     <h3 style="text-align:center">Notice</h3>
 </div>
 
 
 <div class="fornotice" style="background-color: aquamarine;" >
     <p>
-       
-        @if(Model.Notices !=null)
-        {
-           
-        
-        <div id="noticetable" style="background-color: aquamarine;">
-            <marquee direction="up" scrolldelay="1" onmouseover="this.stop();" onmouseout="this.start();">
-        <ul >
-           
-             @foreach (Notice notice in Model.Notices)
-            {
-                    <li id="noticetabletr" style=" background-color: azure;;margin-right:20px;">
-                        
-                        <h6 style="width:200px;height:30px;margin-left:30px;">@notice.ShortDescription</h6>
-                        <p style="width:100px;height:30px;;margin-top:-40px;margin-left:300px;">@notice.Time</p>
-                        <p style="margin-left:30px;width: 400px;height:100%;margin-top:20px;">@notice.Description</p>
+
+@if (Model.Notices != null)
+{
+
+
+            <div id="noticetable" style="background-color: aquamarine;">
+                <marquee direction="up" scrolldelay="1" onmouseover="this.stop();" onmouseout="this.start();">
+            <ul >
+
+                @foreach (Notice notice in Model.Notices)
+                {
+                            <li id="noticetabletr" style=" background-color: azure;;margin-right:20px;">
+
+                                <h6 style="width:200px;height:30px;margin-left:30px;">@notice.ShortDescription</h6>
+                                <p style="width:100px;height:30px;;margin-top:-40px;margin-left:300px;">@notice.Time</p>
+                                <p style="margin-left:30px;width: 400px;height:100%;margin-top:20px;">@notice.Description</p>
 
                         @* <td>@notice.NId</td>
-                        <td>@notice.ShortDescription</td>
-                        <td>@notice.Description</td>
-                        <td>@notice.Time</td> *@
-                      
-                    </li>
-            }
-        </ul>
-        </marquee>
-        </div>
+                            <td>@notice.ShortDescription</td>
+                            <td>@notice.Description</td>
+                            <td>@notice.Time</td> *@
 
-            }
-            else
-            {
-                <p>No Notice is added</p>
-            }
-
-    </p>
-</div>
-
-
-<div class="running_problems">
-
-<h4  style="text-align:center">Teacher info</h4>
-@if(Model.Publish_submission !=null)
-{
- 
-    <table >
-    <tr>
-        <th  style="padding: 15px"  >Name</th>
-        <th  style="padding: 15px"  >Problem Name</th>
-        <th  style="padding: 15px" >Time</th>
-        <th  style="padding: 15px" >Verdict</th>
-        <th  style="padding: 15px" >Problem Id</th>
-
-    </tr>
-    @foreach (publish_submission ps in Model.Publish_submission)
-    {
-        <tr >
-            <td>@ps.user_name</td>
-            <td>@ps.problem_name</td>
-            <td>@ps.time_</td>
-            <td>@ps.verdict</td>
-            <td>
-                @{
-                    string url =   "https://codeforces.com/problemset/problem/"+@ps.contest_id+"/"+@ps.problem_id;
-
+                            </li>
                 }
-                <a href= @url>
-                    @ps.contest_id @ps.problem_id
-            </td>
-        </tr> 
-    }
-</table>
+            </ul>
+            </marquee>
+            </div>
 
 }
 else
 {
-    <p>No problem is found</p>
+                    <p>No Notice is added</p>
 }
+
+    </p>
+</div-->
+
+
+<div class="running_problems">
+
+    <h4 style="text-align:center; color:#00BFFF ;">Submissions</h4>
+
+    @if (Model.Publish_submission != null)
+    {
+
+        <table class="tableclass">
+            <tr>
+                <th style="padding: 15px">Name</th>
+                <th style="padding: 15px">Problem Name</th>
+                <th style="padding: 15px">Time</th>
+                <th style="padding: 15px">Verdict</th>
+                <th style="padding: 15px">Problem Id</th>
+
+            </tr>
+            @foreach (publish_submission ps in Model.Publish_submission)
+            {
+                <tr>
+                    <td>@ps.user_name</td>
+                    <td>@ps.problem_name</td>
+                    <td>@ps.time_</td>
+                    
+                               @if(string.Compare(ps.verdict, "OK")==0)
+                               {
+                                   <td style="color: green;font-weight:bold;">
+                                       ACCEPTED
+                                    </td>
+                                   
+                               }
+                        else{
+                             <td style="color: red;">
+                                       @ps.verdict
+                                    </td>
+
+                        }
+
+                    <td>
+                        @{
+                            string url = "https://codeforces.com/problemset/problem/" + @ps.contest_id + "/" + @ps.problem_id;
+
+                        }
+                        <a href=@url>
+                            @ps.contest_id @ps.problem_id
+                    </td>
+                </tr>
+            }
+        </table>
+
+    }
+    else
+    {
+        <p>No problem is found</p>
+    }
 
 </div>
 
@@ -181,7 +246,7 @@ else
   display: flex;
   justify-content: center;
   align-items: center;">
-    
+
     <a style="height: 40px;
   width: 40px;
   background-color: #f5f6fa;

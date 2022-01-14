@@ -67,7 +67,7 @@ namespace MyWebApp.Controllers
             var teams_ = await _teContext._teams.ToListAsync();
             var archive__ = await _aContext._archives.ToListAsync();
 
-            var homeimage = "homeImage";
+          //  var homeimage = "homeImage";
 
             //var images_ =  _iContext.__images.Where(y => y.ImageName.Contains(homeimage)).ToList();
 

@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - PandaCode</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <!--link rel="stylesheet" href="~/css/mycss.css" /-->
     @* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" 
             integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY36qM3lon1gyExkL0=" crossorigin="anonymous"/> *@
 </head>
@@ -18,64 +19,32 @@
     }
     Console.WriteLine(val);
 }
-<body>
-    <header>
-        <div style="background-color:black;text-align:center; ">
-        <img style="height:250px;width:1500px" src= "~/Images/web.jpg" />
-        </div>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <!--
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MyWebApp</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                -->
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="width:40px;margin-left:-100px; margin-right=-200px;">
-                    <ul class="navbar-nav flex-grow-1" >
-                        <li class="nav-item" >
-                            <a class="btn"  asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn"  asp-area="" asp-controller="Contest" asp-action="Index">Upcoming Contest</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn"  asp-area="" asp-controller="AddProblem" asp-action="Index">Problem List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn" asp-area="" asp-controller="ClubInfo" asp-action="Index">About SGIPC</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn" asp-area="" asp-controller="Resource" asp-action="Index">Resources</a>
-                        </li>
-                       
 
-                        @if( string.Compare(val, "Arman")==0)
-                        {
-
-
-                        <li class="nav-item" style="margin-left:600px;">
-                            <a class="btn" asp-area="" asp-controller="Users" asp-action="Create">Register</a>
-                        </li>
-                        <li class="nav-item" >
-                            <a class="btn"  asp-area="" asp-controller="Users" asp-action="Login">Login</a>
-                        </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item" style="margin-left:600px;">
-                            <a class="btn" asp-area="" asp-controller="Users" asp-action="Details">@ViewData["curName"]</a>
-                             </li>
-                             <li class="nav-item" style="margin-left:2px;">
-                            <a class="btn" asp-area="" asp-controller="Users" asp-action="Logout">Logout</a>
-                             </li>
-                        }
-                    </ul>
-                </div>
+<body >
+    
+        
+   
+    <div class="sgipclogo" style="background-color:transparent;">
+       
+            <img  class="sgipclogoi" src="../Images/sgipclogo.jpeg"/>
+            <div  class=" homebutton" >
+                  
+                <a class="btn" asp-area="" asp-controller="Home" asp-action="Index">Home</a>  
+                <a class="btn" asp-area="" asp-controller="Contest" asp-action="Index">Upcoming Contest</a>
+                <a class="btn" asp-area="" asp-controller="AddProblem" asp-action="Index">Problem List</a>
+                <a class="btn" asp-area="" asp-controller="ClubInfo" asp-action="Index">About SGIPC</a>
+                <a class="btn" asp-area="" asp-controller="Resource" asp-action="Index">Resources</a>
+                <div style="margin-right: 0;margin-left:auto;">
+                <a class="btn" asp-area="" asp-controller="Users" asp-action="Create">Register</a>
+                <a class="btn" asp-area="" asp-controller="Users" asp-action="Login">Login</a>
             </div>
-        </nav>
-    </header>
+        </ul>
+    </div>
+      
+    
+    
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -91,5 +60,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+    
+    
 </body>
 </html>
