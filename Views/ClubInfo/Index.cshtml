@@ -23,7 +23,7 @@
             @foreach (UserWithRating u in Model.usersWithRating)
             {
                 <tr>
-                    <td>@u.users.FullName</td>
+                    <td>  <a style="text-decoration: none; color: rgb(186, 219, 224);" asp-controller="Users" asp-action="DetailsMember" asp-route-id="@u.users.UserId" >@u.users.FullName</a></td>
                     <td>@u.users.CfId</td>
                     <td>@u.rating</td>
                     @* <td>@u.users.Email</td> *@
@@ -47,7 +47,7 @@
     @if (Model.Teachers != null)
     {
 
-        <table class="tableclass" style="margin-top:25px;">
+        <table class="tableclass" style="margin-top:25px;width:530px;">
             <tr>
                 @* <th style="padding: 15px">Id</th> *@
                 <th style="padding: 15px">Name</th>

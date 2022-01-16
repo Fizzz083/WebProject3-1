@@ -124,6 +124,47 @@ namespace MyWebApp.Controllers
             return View(model);
         }
 
+         public async Task<IActionResult> DetailsMember(int? id)
+        {
+           
+            string cookieValueFromReq = Request.Cookies["curName"];  
+            ViewData["curName"] = cookieValueFromReq;
+             Console.WriteLine(ViewData["curName"]);
+            //ViewData["curName"] = HttpContext.Session.GetString("curName");
+            if (ViewData["curName"] == null)
+            {
+                Console.WriteLine("Calling the details");
+                return NotFound();
+            }
+
+            string user = ViewData["curName"].ToString();
+
+            if(user==null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var users = await _context._users
+                .FirstOrDefaultAsync(m => m.UserId == id);
+            if (users == null)
+            {
+                Console.Write("Not Founded user for showing the details..");
+                return NotFound();
+            }
+
+            var img = await _iContext.__images.FirstOrDefaultAsync(m => m.ImageName == users.Name);
+
+            if (img != null)
+            {
+                string imageBase64Data = Convert.ToBase64String(img.Datafiles);
+                string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+                ViewBag.ImageData = imageDataURL;
+            }
+
+            
+            return View(users);
+        }
+
         // GET: Users/Create
         public IActionResult Create()
         {

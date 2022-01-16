@@ -32,10 +32,10 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="uplabel" asp-for="PhoneNUmber" class="control-label"></label>
-                <input asp-for="PhoneNUmber" class="form-control" />
-                <span asp-validation-for="PhoneNUmber" class="text-danger"></span>
-            </div>
+                    @* <label class="uplabel" asp-for="PhoneNUmber" class="control-label"></label> *@
+                    <input type="hidden" asp-for="PhoneNUmber" class="form-control" />
+                    @* <span asp-validation-for="PhoneNUmber" class="text-danger"></span> *@
+                </div>
             
             <div class="form-group">
                 <input type="submit" value="AddTeacher" class="btn2 btn2up" />

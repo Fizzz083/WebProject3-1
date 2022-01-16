@@ -121,6 +121,8 @@ namespace MyWebApp.Controllers
                     return View();
                 }
 
+                Console.WriteLine(teacher.PhoneNUmber);
+
                  _tContext.Add(teacher);
                 await _tContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

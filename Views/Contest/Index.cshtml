@@ -1,14 +1,19 @@
 @model IEnumerable<MyWebApp.Models.result>
 
 @{
+
     var timee = DateTimeOffset.Now.ToUnixTimeSeconds();
+    ViewData["Title"] = "Contest";
 }
 
 
+
 <p>
-    <h4 class="textstylei">Upcoming Contest</h4>
+<h4 class="textstylei">Upcoming Contest</h4>
 </p>
-<table class="tableclass">
+
+
+<table class="tableclass" style="margin-top: 20px;width:700px;">
     <thead>
         <tr>
             <th></b>Id</th>
@@ -18,36 +23,45 @@
         </tr>
     </thead>
     <tbody>
-@foreach ( var item in Model ) {
-    @if(item.startTimeSeconds!>= timee)
-    {
-        <tr>
-            <td>
-                @item.id
-            </td>
-            <td>
-                @item.name
-            </td>
-            <td>
-                @TimeSpan.FromSeconds(@item.durationSeconds)
-            </td>
-            <td>
-                @{
-                    
-                  //var time = TimeSpan.FromMilliseconds(@item.startTimeSeconds*1000) ;
+        @foreach (var item in Model)
+        {
+            @if (item.startTimeSeconds! >= timee)
 
-                    //var time__ = new DateTime(time.Ticks).ToLocalTime;
+            {
+                <tr>
+                    <td>
+                        @item.id
+                    </td>
+                    <td>
+                        @item.name
+                    </td>
+                    <td>
+                        @TimeSpan.FromSeconds(@item.durationSeconds)
+                    </td>
+                    <td>
+                        @{
 
-                    var time__ = DateTimeOffset.FromUnixTimeSeconds(@item.startTimeSeconds).DateTime.ToLocalTime();
-                   
-            
-                    //DateTime dateTime = New DateTime (long.Parse(@item.durationSeconds));
-                }
-                @time__
-            </td> 
-        </tr>
-    }
-}
+                            //var time = TimeSpan.FromMilliseconds(@item.startTimeSeconds*1000) ;
+
+
+
+                            //var time__ = new DateTime(time.Ticks).ToLocalTime;
+
+
+
+                            var time__ = DateTimeOffset.FromUnixTimeSeconds(@item.startTimeSeconds).DateTime.ToLocalTime();
+
+
+
+
+                            //DateTime dateTime = New DateTime (long.Parse(@item.durationSeconds));
+                        }
+                        @time__
+                    </td>
+                </tr>
+
+            }
+
+        }
     </tbody>
 </table>
-
