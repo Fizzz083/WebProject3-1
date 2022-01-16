@@ -1,5 +1,10 @@
 @model MyWebApp.Models.CollectionDataModel
 
+@{
+    ViewData["Title"] = "Admin";
+}
+
+
 <style>
     hr.rounded {
   border-top: 8px solid #bbb;
@@ -7,16 +12,20 @@
 }
 </style>
 
+<div style="margin-top:40px;">
 
-   <h4  style="text-align:center">Teacher info</h4>
+</div>
+
+   <h4  style="text-align:center" class="textstylei">Teacher info</h4>
 @if(Model.Teachers !=null)
 {
  
-    <table >
+    <table class="tableclass" style="width: 100%; margin-top:20px;" >
     <tr>
         <th  style="padding: 15px"  >Id</th>
         <th  style="padding: 15px"  >Name</th>
         <th  style="padding: 15px" >Email</th>
+        <th  style="padding: 15px" ></th>
     </tr>
     @foreach (Teacher teacher in Model.Teachers)
     {
@@ -39,34 +48,38 @@ else
     <p>No Teacher is added</p>
 }
 
-<div>
-<p>
-    <a asp-action="AddTeacher">Create New</a>
+<div  style="text-align: left;align-ittems:left;margin-top:20px;">
+<p class="btn2 btn2up" >
+    <a  style="color: black;text-decoration:none;"  asp-action="AddTeacher">Add Coach</a>
 </p>
 </div>
 
 <br/>
 <br/>
-<hr class="rounded">
+<hr class="roundedd">
+<div style="margin-top:30px;">
+
+</div>
 
 
-<h4  style="text-align:center">Notice</h4>
+<h4 class="textstylei" style="text-align:center">Notice</h4>
 @if(Model.Notices !=null)
 {
     
-    <table>
+    <table class="tableclass" style="width: 100%;margin-top:20px;">
     <tr style="padding: 5px">
         <th  style="padding: 15px" >Id</th>
         <th  style="padding: 15px" >Short Description</th>
-        <th  style="padding: 15px">Descriptin</th>
+        @* <th  style="padding: 15px">Descriptin</th> *@
         <th  style="padding: 15px">Time</th>
+        <th  style="padding: 15px" ></th>
     </tr>
     @foreach (Notice notice in Model.Notices)
     {
         <tr>
             <td>@notice.NId</td>
             <td>@notice.ShortDescription</td>
-            <td>@notice.Description</td>
+            @* <td>@notice.Description</td> *@
             <td>@notice.Time</td>
             <td  style="padding: 15px" >
                 <a asp-action="NoticeEdit" asp-route-id="@notice.NId">Edit</a> |
@@ -83,21 +96,24 @@ else
     <p>No Notice is added</p>
 }
 
-<div>
-<p>
-    <a asp-action="AddNotice">Create New</a>
+<div  style="text-align: left;align-ittems:left;margin-top:20px;">
+<p class="btn2 btn2up" >
+    <a  style="color: black;text-decoration:none;" asp-action="AddNotice">Add Notice</a>
 </p>
 </div>
 
 <br/>
 <br/>
-<hr class="rounded">
+<hr class="roundedd">
+<div style="margin-top:30px;">
 
- <h4  style="text-align:center">Teams</h4>
+</div>
+
+ <h4 class="textstylei" style="text-align:center">Teams</h4>
 @if(Model.Teams !=null)
 {
    
-    <table>
+    <table class="tableclass" style="width: 100%;margin-top:20px;">
     <tr style="padding: 5px">
         <th  style="padding: 15px" >Team Id</th>
         <th  style="padding: 15px" >Team Name</th>
@@ -106,6 +122,7 @@ else
         <th  style="padding: 15px">Member 3</th>
         <th  style="padding: 15px">Email</th>
         <th  style="padding: 15px">Phonenumber</th>
+        <th  style="padding: 15px" ></th>
     </tr>
     @foreach (Team team in Model.Teams)
     {
@@ -132,26 +149,30 @@ else
     <p>No Team is added</p>
 }
 
-<div>
-<p>
-    <a asp-action="AddTeam">Create New</a>
+<div  style="text-align: left;align-ittems:left;margin-top:20px;">
+<p class="btn2 btn2up" >
+    <a  style="color: black;text-decoration:none;"  asp-action="AddTeam">Add Team</a>
 </p>
 </div>
 
 <br/>
 <br/>
-<hr class="rounded">
+<hr class="roundedd">
+<div style="margin-top:30px;">
 
- <h4  style="text-align:center">Archives</h4>
+</div>
+
+ <h4 class="textstylei" style="text-align:center">Archives</h4>
 @if(Model.Archives !=null)
 {
    
-    <table>
+    <table class="tableclass" style="width: 100%;margin-top:20px;">
     <tr style="padding: 5px">
         <th  style="padding: 15px" >Archive Id</th>
         <th  style="padding: 15px" >Contest Name</th>
         <th  style="padding: 15px" >Year</th>
         <th  style="padding: 15px" >position</th>
+        <th  style="padding: 15px" ></th>
         @* <th  style="padding: 15px">Member 1</th>
         <th  style="padding: 15px">Member 2</th>
         <th  style="padding: 15px">Member 3</th> *@
@@ -182,27 +203,31 @@ else
     <p>No archive is added</p>
 }
 
-<div>
-<p>
-    <a asp-action="AddArchive">Create New</a>
+<div  style="text-align: left;align-ittems:left;margin-top:20px;">
+<p class="btn2 btn2up" >
+    <a  style="color: black;text-decoration:none;"  asp-action="AddArchive">Add Archive</a>
 </p>
 </div>
 
 <br/>
 <br/>
-<hr class="rounded">
+<hr class="roundedd">
+<div style="margin-top:30px;">
+
+</div>
 
 
 
- <h4  style="text-align:center">Home images</h4>
+ <h4 class="textstylei" style="text-align:center">Home images</h4>
 @if(Model.Archives !=null)
 {
    
-    <table>
+    <table class="tableclass" style="width: 100%;margin-top:20px;">
     <tr style="padding: 5px">
         <th  style="padding: 15px" >Image Id</th>
         <th  style="padding: 15px" >Image Name</th>
         <th  style="padding: 15px" >Image</th>
+        <th  style="padding: 15px" ></th>
         @* <th  style="padding: 15px">Member 1</th>
         <th  style="padding: 15px">Member 2</th>
         <th  style="padding: 15px">Member 3</th> *@
@@ -245,9 +270,9 @@ else
     <p>No Image is added</p>
 }
 
-<div>
-<p>
-    <a asp-action="AddHomeImage">Create New</a>
+<div  style="text-align: left;align-ittems:left;margin-top:20px;">
+<p class="btn2 btn2up" >
+    <a  style="color: black;text-decoration:none;" asp-action="AddHomeImage">Add Home Image</a>
 </p>
 </div>
 

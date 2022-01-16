@@ -133,6 +133,7 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> TeacherDelete(int? id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             if (id == null)
             {
                 return NotFound();
@@ -169,6 +170,7 @@ namespace MyWebApp.Controllers
         
         public async Task<IActionResult> TeacherDetails(int? id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             var teacher = await _tContext._teachers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (teacher == null)
@@ -191,6 +193,7 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> TeacherEdit(int? id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             //ViewData["curName"] = HttpContext.Session.GetString("curName");
             if (id == null)
             {
@@ -354,6 +357,7 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> NoticeDelete(int? id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             if (id == null)
             {
                 return NotFound();
@@ -375,6 +379,7 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> NoticeDelete(int id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
 
             Console.WriteLine("deleting teacher...");
             var notice = await _nContext._notices
@@ -391,6 +396,7 @@ namespace MyWebApp.Controllers
         
         public async Task<IActionResult> NoticeDetails(int? id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             var notice = await _nContext._notices
                 .FirstOrDefaultAsync(m => m.NId == id);
             if (notice == null)
@@ -413,6 +419,7 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> NoticeEdit(int? id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             //ViewData["curName"] = HttpContext.Session.GetString("curName");
             if (id == null)
             {
@@ -435,6 +442,7 @@ namespace MyWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> NoticeEdit(int id, [Bind("NId,ShortDescription,Description,Time")] Notice notice)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             Console.WriteLine("teacher edit..");
             if (id != notice.NId)
             {
@@ -526,6 +534,7 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> TeamDelete(int? id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             if (id == null)
             {
                 return NotFound();
@@ -547,6 +556,7 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> TeamDelete(int id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
 
             Console.WriteLine("deleting Team...");
             var team_ = await _teContext._teams
@@ -563,6 +573,7 @@ namespace MyWebApp.Controllers
         
         public async Task<IActionResult> TeamDetails(int? id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             var team_ = await _teContext._teams
                 .FirstOrDefaultAsync(m => m.TId == id);
             if (team_ == null)
@@ -585,6 +596,7 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> TeamEdit(int? id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             //ViewData["curName"] = HttpContext.Session.GetString("curName");
             if (id == null)
             {
@@ -607,6 +619,7 @@ namespace MyWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> TeamEdit(int id, [Bind("TId,TeamName,Member1,Member2,Member3,Email,Phonenumber")] Team team)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             Console.WriteLine("teacher edit..");
             if (id != team.TId)
             {
@@ -708,6 +721,7 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> ArchiveDelete(int? id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             if (id == null)
             {
                 return NotFound();
@@ -738,13 +752,14 @@ namespace MyWebApp.Controllers
             {
                 Console.WriteLine("found teacher for delete...");
                 _aContext._archives.Remove(archive_);
-                await _tContext.SaveChangesAsync();
+                await _aContext.SaveChangesAsync();
             }
             return RedirectToAction(nameof(Index));
         }
         
         public async Task<IActionResult> ArchiveDetails(int? id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             var archive_ = await _aContext._archives
                  .FirstOrDefaultAsync(m => m.AId == id);
             if (archive_ == null)
@@ -760,6 +775,7 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> ArchiveEdit(int? id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             //ViewData["curName"] = HttpContext.Session.GetString("curName");
             if (id == null)
             {
@@ -906,6 +922,7 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> HomeImageDelete(int? id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             if (id == null)
             {
                 return NotFound();
@@ -927,6 +944,7 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> HomeImageDelete(int id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
 
             Console.WriteLine("deleting image...");
             var image_ = await _iContext.__images

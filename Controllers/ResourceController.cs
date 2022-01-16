@@ -45,6 +45,7 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             CollectionDataModel model = new CollectionDataModel();
             var resource_ = await _rContext._Resource.ToListAsync();
             model.Resources = resource_;
@@ -55,6 +56,11 @@ namespace MyWebApp.Controllers
         {
             string cookieValueFromReq = Request.Cookies["curName"];
             ViewData["curName"] = cookieValueFromReq;
+            
+            if(cookieValueFromReq==null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
             return View();
         }
 
@@ -123,6 +129,7 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> ResourceDelete(int? id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             if (id == null)
             {
                 return NotFound();
@@ -144,6 +151,8 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> ResourceDelete(int id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
+
 
             Console.WriteLine("deleting Resource...");
             var resource = await _rContext._Resource.FindAsync(id);
@@ -159,6 +168,7 @@ namespace MyWebApp.Controllers
         
         public async Task<IActionResult> ResourceDetails(int? id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             var resource = await _rContext._Resource
                 .FirstOrDefaultAsync(m => m.RId == id);
             if (resource == null)

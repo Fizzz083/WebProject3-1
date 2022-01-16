@@ -14523,6 +14523,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "e:\\MyWebApp\\Views\\AddProblem\\Delete.cshtml",
+      "TargetPath": "Views\\AddProblem\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "e:\\MyWebApp\\Views\\_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
       "FileKind": "mvc"
@@ -14605,6 +14610,11 @@
     {
       "FilePath": "e:\\MyWebApp\\Views\\Home\\NoticeDetails.cshtml",
       "TargetPath": "Views\\Home\\NoticeDetails.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "e:\\MyWebApp\\Views\\Resource\\ResourceDelete.cshtml",
+      "TargetPath": "Views\\Resource\\ResourceDelete.cshtml",
       "FileKind": "mvc"
     },
     {

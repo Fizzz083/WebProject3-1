@@ -4,56 +4,59 @@
     ViewData["Title"] = "Archive Details";
 }
 
-<h1>Archive Details</h1>
+<div style="align-items: center;
+  justify-content: left;">
+<h1 class="textstylei">Archive</h1>
+</div>
+<hr />
 
-
-<div>
+<div class="noticedetails" >
             
     <!-- h4>Users</h4 -->
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-2 uplabel"   >
             @Html.DisplayNameFor(model => model.ContestName)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ContestName)
+        <dd class = "col-sm-10 info">
+           : @Html.DisplayFor(model => model.ContestName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-2 uplabel" >
             @Html.DisplayNameFor(model => model.Year)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Year)
+        <dd class = "col-sm-10 info">
+           : @Html.DisplayFor(model => model.Year)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-2 uplabel" >
             @Html.DisplayNameFor(model => model.Position)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Position)
+        <dd class = "col-sm-10 info">
+           : @Html.DisplayFor(model => model.Position)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-2 uplabel " >
             @Html.DisplayNameFor(model => model.TeamName)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TeamName)
+        <dd class = "col-sm-10 info">
+           : @Html.DisplayFor(model => model.TeamName)
         </dd>
 
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-2 uplabel" >
             @Html.DisplayNameFor(model => model.Member1)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Member1)
+        <dd class = "col-sm-10 info">
+            : @Html.DisplayFor(model => model.Member1)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-2 uplabel" >
             @Html.DisplayNameFor(model => model.Member2)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Member2)
+        <dd class = "col-sm-10 info">
+           : @Html.DisplayFor(model => model.Member2)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-2 uplabel" >
             @Html.DisplayNameFor(model => model.Member3)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Member3)
+        <dd class = "col-sm-10 info">
+           : @Html.DisplayFor(model => model.Member3)
         </dd>
     </dl>
 </div>

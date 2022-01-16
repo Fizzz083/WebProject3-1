@@ -46,6 +46,7 @@ namespace MyWebApp.Models
 
     public class CollectionDataModel
         {
+            public Users users {get;set;}
             public List<Teacher> Teachers { get; set; }
             public List<Notice> Notices { get; set; }
 
@@ -59,6 +60,9 @@ namespace MyWebApp.Models
             public List<UserWithRating> usersWithRating{get;set;}
 
              public List<Resource> Resources {get;set;}
+
+             public List<AddProblem> AddProblems {get;set;}
+
 
         }
 

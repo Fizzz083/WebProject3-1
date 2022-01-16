@@ -214,6 +214,7 @@ namespace MyWebApp.Controllers
         
          public async Task<IActionResult> NoticeDetails(int? id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
 
              var notice = await _nContext._notices.FindAsync(id);
             if (notice == null)
@@ -226,12 +227,14 @@ namespace MyWebApp.Controllers
 
         public IActionResult Privacy()
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }

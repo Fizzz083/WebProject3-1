@@ -4,55 +4,60 @@
     ViewData["Title"] = "Add Resource";
 }
 
-<h1>Add resource</h1>
+<div style="align-items: center;
+  justify-content: left;">
+    <h1 class="textstylei">Add Resourcs</h1>
+</div>
+<hr />
 
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="AddResource">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ShortDescription" class="control-label"></label>
-                <input asp-for="ShortDescription" class="form-control" />
-                <span asp-validation-for="ShortDescription" class="text-danger"></span>
-            </div>
-        
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Topic" class="control-label"></label>
-                <input asp-for="Topic" class="form-control" />
-                <span asp-validation-for="Topic" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="Datafiles" type="hidden" class="form-control" />
-                <span asp-validation-for="Datafiles" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="AddedBy" type="hidden" class="form-control" />
-                <span asp-validation-for="AddedBy" class="text-danger"></span>
-            </div>
-            
-             <div class="form-group">
-                <p>Upload Pdf/Doc </p>
-                <input name="files" type="file" class="form-control" />
-            </div>
 
-            
-            
-            <div class="form-group">
-                <input type="submit" value="AddResource" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="">
+    <div class="row" style="margin-left: 80px;margin-top=20px;">
+        <div class="col-md-4">
+            <form asp-action="AddResource">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="uplabel" asp-for="ShortDescription" class="control-label"></label>
+                    <input asp-for="ShortDescription" class="form-control" />
+                    <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="uplabel" asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="uplabel" asp-for="Topic" class="control-label"></label>
+                    <input asp-for="Topic" class="form-control" />
+                    <span asp-validation-for="Topic" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input class="uplabel" asp-for="Datafiles" type="hidden" class="form-control" />
+                    <span asp-validation-for="Datafiles" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input class="uplabel" asp-for="AddedBy" type="hidden" class="form-control" />
+                    <span asp-validation-for="AddedBy" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @* <p class="uplabel">Upload Pdf/Doc </p> *@
+                    <input hidden="true" name="files" type="file" class="form-control" />
+                </div>
+
+
+
+                <div class="form-group">
+                    <input type="submit" value="AddResource" class="btn2 btn2up" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
 
-
-@section Scripts {
+    @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
-
+    }

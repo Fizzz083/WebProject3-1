@@ -1,7 +1,7 @@
 @model List<MyWebApp.Models.AddProblem>
 
 @{
-    ViewData["Title"] = "Added Problems";
+    ViewData["Title"] = "Problems";
 }
 
 @* @using X.PagedList;
@@ -13,7 +13,7 @@
 
 <div style="margin-top: 40px;">
 <h3 class="textstylei">Problems</h3>
-<table class ="tableclass">
+<table class ="tableclass" style="width: 900px; height:auto;">
     <tr>
         <th>
             Problem Name
@@ -54,7 +54,8 @@
                            @Html.DisplayFor(modelItem => item.PAddedBy)
                         </td>
                         <td>
-                           @Html.DisplayFor(modelItem => item.PLink)
+                            <a href="@Html.DisplayFor(modelItem => item.PLink)" > Try to solve</a>
+                           
                         </td>
                     </tr>
         }
@@ -87,7 +88,7 @@
 
         }
 
-    <div class="pagingbutton">
+    <div class="btn2 btn2up" style="height: 30px;">
 
             @if (si > 5)
             {
@@ -112,7 +113,7 @@
             }
     </div>
     <div style="margin-left: 10px;"></div>
-    <div class="pagingbutton">
+    <div class="btn2 btn2up" style="height: 30px;">
             @if ((int)ViewData["done"] != 1)
             {
             <a asp-area="" asp-controller="AddProblem" asp-action="Index" asp-route-i=2 asp-route-size="@si">Next</a>
@@ -126,8 +127,8 @@
 </div>
 
 
-<div style="margin-left: 60px;height:40px;;">
-    <a class="btn2" style="text-decoration: none;color:black;"  asp-area="" asp-controller="AddProblem" asp-action="Create">Add problems</a>
+<div style="margin-left: 130px;height:40px;;">
+    <a class="btn2 btn2up" style="text-decoration: none;color:black;"  asp-area="" asp-controller="AddProblem" asp-action="Create">Add problems</a>
 </div>
 
 

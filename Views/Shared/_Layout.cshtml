@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PandaCode</title>
+    <title>@ViewData["Title"] - SGIPC</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <!--link rel="stylesheet" href="~/css/mycss.css" /-->
@@ -18,6 +18,12 @@
      val = ViewData["curName"].ToString();
     }
     Console.WriteLine(val);
+    var admin = 0;
+    if( string.Compare((string)ViewData["curName"], "FatPanda")==0 ){
+
+       admin=1;
+    }
+
 }
 
 <body >
@@ -26,7 +32,7 @@
    
     <div class="sgipclogo" style="background-color:transparent;">
        
-            <img  class="sgipclogoi" src="~/Images/sgipclogo.jpeg"/>
+            <img  class="sgipclogoi logoshadowi "  src="~/Images/sgipclogo.jpeg"/>
             <div  class=" homebutton" >
                   
                 <a class="button2 buttonshadowi" asp-area="" asp-controller="Home" asp-action="Index">Home</a>  
@@ -37,9 +43,13 @@
                 <a class="button2 buttonshadowi" asp-area="" asp-controller="ClubInfo" asp-action="Index">About SGIPC</a>
 
                 <div style="margin-right: 0;margin-left:auto;">
+                    @if(admin==1)
+                    { 
+                        <a class="button2 buttonshadowi" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+                    }
                 @if( string.Compare(val, "Arman")==0)
                     {
-                    <a class="button2 buttonshadowi" asp-area="" asp-controller="Users" asp-action="Create">Register</a>
+                        <a class="button2 buttonshadowi" asp-area="" asp-controller="Users" asp-action="Create">Register</a>
                         <a class="button2 buttonshadowi" asp-area="" asp-controller="Users" asp-action="Login">Login</a>
                     }
                 else{

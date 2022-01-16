@@ -103,6 +103,10 @@ namespace MyWebApp.Controllers
 
             string cookieValueFromReq = Request.Cookies["curName"];
             ViewData["curName"] = cookieValueFromReq;
+            if(cookieValueFromReq==null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
             return View();
         }
 
@@ -134,11 +138,13 @@ namespace MyWebApp.Controllers
 
         public IActionResult Error()
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             return View();
         }
 
         public async Task<IActionResult> Delete(int? id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             if (id == null)
             {
                 return NotFound();

@@ -14,19 +14,19 @@ namespace MyWebApp.Models
 
         [Display(Name="Username")]
         [StringLength(20)]
-        [Required(ErrorMessage = "(0) is a required")]
+        [Required(ErrorMessage = "This can't be empty")]
         public string Name { get; set; }
 
 
         [Display(Name = "Full Name")]
         [StringLength(50)]
-        [Required(ErrorMessage = "(0) is a required")]
+        [Required(ErrorMessage = "FullName can't be empty")]
         public string FullName { get; set; }
 
 
         [Display(Name = "Email")]
         [StringLength(30)]
-        [Required(ErrorMessage = "(0) is a required")]
+        [Required(ErrorMessage = "Email cant't be empty")]
         public string Email { get; set; }
 
         [Display(Name = "Phone Number")]
@@ -36,6 +36,7 @@ namespace MyWebApp.Models
 
         [Display(Name = "Password")]
         [StringLength(20)]
+        [Required(ErrorMessage = "Enter password")]
         public string Password{get;set;}
 
         [Display(Name = "Codeforces Id")]

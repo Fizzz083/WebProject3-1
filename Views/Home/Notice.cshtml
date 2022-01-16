@@ -9,8 +9,8 @@
 </div>
 
 
-<div class="boxshadowi" style="margin-top: 20px;" >
-    <p>
+<div class="" style="margin-top: 20px;" >
+    
 
 @if (Model.Notices != null)
 {
@@ -21,12 +21,12 @@
                 @foreach (Notice notice in Model.Notices)
                 {
                     <a style="text-decoration: none;"  asp-action="NoticeDetails" asp-route-id="@notice.NId">
-                        <li id="noticetabletr" style="color:black; background-color: #d0ebf7;margin-right:20px;">
-
-                                <h6 style=" margin-top:10px; width:500px;height:40px;margin-left:30px; font-size:20px; font-weight:bold;color:black">@notice.ShortDescription</h6>
+                        <li id="noticetabletr" style="margin-top:20px; background-color: rgba(147, 173, 204, 0.411);box-shadow:  0 0 40px 20px rgb(0,0,0,0.10);margin-right:20px;">
+                                <div style="margin-top: 30px;;">
+                                <h6 style=" width:500px;height:40px;margin-left:30px; font-size:20px; font-weight:bold;color:white;">@notice.ShortDescription</h6>
                                 <p style="width:auto;height:30px;;margin-top:-50px;margin-left:700px;font-weight:bold;color:black">@notice.Time</p>
                                 <p class="fixedword" style="height:auto; width:1000px; color: black; margin-left:30px;;margin-top:20px;">@notice.Description ...</p>
-
+                                </div>
                             @* <td>@notice.NId</td>
                             <td>@notice.ShortDescription</td>
                             <td>@notice.Description</td>
@@ -43,5 +43,5 @@ else
                     <p>No Notice is added</p>
 }
 
-    </p>
+    
 </div>

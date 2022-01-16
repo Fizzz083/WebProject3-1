@@ -37,12 +37,16 @@ namespace MyWebApp.Controllers
         //  public baseuser baseuser_;
         public UsersDbContext _context;
         public ImagesDbContext _iContext;
+        public AddProblemsDbContext _pContext;
+        public ResourceDbContext _rContext;
 
-        public UsersController(UsersDbContext context, ImagesDbContext iContext)
+        public UsersController(AddProblemsDbContext pContext,ResourceDbContext rContext, UsersDbContext context, ImagesDbContext iContext)
         {
             // ViewData["curName"] = HttpContext.Session.GetString("curName");
             _context = context;
             _iContext = iContext;
+            _rContext = rContext;
+            _pContext = pContext;
         }
 
         // GET: Users
@@ -50,6 +54,11 @@ namespace MyWebApp.Controllers
         {
             string cookieValueFromReq = Request.Cookies["curName"];  
             ViewData["curName"] = cookieValueFromReq;
+            if (ViewData["curName"] == null)
+            {
+                //Console.WriteLine("Calling the details");
+                return RedirectToAction("Index", "Home");
+            }
            // ViewData["curId"] = HttpContext.Session.GetInt32("curId");
             //ViewData["curId"]= helperClass.getUniqueId();
             return View(await _context._users.ToListAsync());
@@ -101,8 +110,18 @@ namespace MyWebApp.Controllers
                 string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
                 ViewBag.ImageData = imageDataURL;
             }
+
+             CollectionDataModel model = new CollectionDataModel();
+            var resource_ = await _rContext._Resource.Where(m=> m.AddedBy==user).ToListAsync();
+
+            model.Resources = resource_;
+            var problem_ = await _pContext._addProblems.Where(m=> m.PAddedBy==user).ToListAsync();
+            model.AddProblems = problem_;
+            model.users = users;
+
+
             Console.Write("Founded user for showing the details..");
-            return View(users);
+            return View(model);
         }
 
         // GET: Users/Create
@@ -150,7 +169,7 @@ namespace MyWebApp.Controllers
                 await _context.SaveChangesAsync();
 
                 CookieOptions option = new CookieOptions();
-                option.Expires = DateTime.Now.AddSeconds(3600);
+                option.Expires = DateTime.Now.AddSeconds(7200);
                 Response.Cookies.Append("curName", users.Name, option);
 
                 string cookieValueFromReq = Request.Cookies["curName"];  
@@ -227,7 +246,7 @@ namespace MyWebApp.Controllers
         // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            ViewData["curName"] = HttpContext.Session.GetString("curName");
+             ViewData["curName"] = Request.Cookies["curName"];
             if (id == null)
             {
                 return NotFound();
@@ -248,6 +267,7 @@ namespace MyWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("UserId, FullName,Email,PhoneNUmber,CfId,LightOjId,CodechefId")] UserEdit users, IFormFile files)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             if (id != users.UserId)
             {
                 return NotFound();
@@ -352,6 +372,7 @@ namespace MyWebApp.Controllers
         // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+             ViewData["curName"] = Request.Cookies["curName"];
             if (id == null)
             {
                 return NotFound();

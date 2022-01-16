@@ -10,11 +10,12 @@
 @if(Model.Resources !=null)
 {
  
-    <table class="tableclass" >
+    <table class="tableclass" style="width: 800px;" >
     <tr>
         <th  style="padding: 15px"  >Topic</th>
         <th  style="padding: 15px"  >Short Description</th>
         <th  style="padding: 15px" >Added By</th>
+        <th  style="padding: 15px" >Details</th>
 
     </tr>
     @foreach (Resource ps in Model.Resources)
@@ -36,7 +37,7 @@ else
     <p>Not found any resource</p>
 }
 
-<div style="margin-left: 100px; height:auto;margin-top:20px;">
-<a class="btn2" style="text-decoration: none;color:black;" asp-action="AddResource">Add new</a>
+<div style="margin-left: 200px; height:auto;margin-top:30px;">
+<a class="btn2 btn2up"  style="text-decoration: none;color:black;" asp-action="AddResource">Add new</a>
 
 </div>

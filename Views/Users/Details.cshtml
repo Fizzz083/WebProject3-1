@@ -1,70 +1,195 @@
-@model MyWebApp.Models.Users
+@model MyWebApp.Models.CollectionDataModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="textstylei">My Profile</h1>
 
 @if (ViewData["ImageData"] != null)
-                    {
-                      <div style=" background-color: darkgrey;width: 300px; padding: 1rem;">
-                        <img style="width: 100%;height: 270px;  object-fit: contain;" src="@ViewBag.ImageData" alt="" />
-                      </div>
-                    }
+{
+    @* <div style=" background-color: darkgrey;width: 300px; padding: 1rem;">
+        <img style="width: 100%;height: 270px;  object-fit: contain;" src="@ViewBag.ImageData" alt="" />
+    </div> *@
+}
 
 <span></span>
 
 <div>
-            
+
     <!-- h4>Users</h4 -->
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FullName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FullName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneNUmber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PhoneNUmber)
-        </dd>
-        <dt class = "col-sm-2">
-            Codeforces Id
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CfId)
-        </dd>
-        <dt class = "col-sm-2">
-            LightOj Id
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LightOjId)
-        </dd>
-        <dt class = "col-sm-2">
-            CodeChef Id
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CodechefId)
-        </dd>
-    </dl>
+    <div class="profront">
+        <div class="proback">
+
+            <div class="profiledetails">
+                <dl class="row prodetailsin">
+                    
+                    <dt class="col-sm-2 infohead">
+                        Full Name:
+                    </dt>
+                    <dd class="col-sm-10 info">
+                        @Html.DisplayFor(model => model.users.FullName)
+                    </dd>
+                    <dt class="col-sm-2 infohead">
+                        Email: 
+                    </dt>
+                    <dd class="col-sm-10 info" >
+                        @Html.DisplayFor(model => model.users.Email)
+                    </dd>
+                    <dt class="col-sm-2 infohead">
+                        Phone :
+                    </dt>
+                    <dd class="col-sm-10 info">
+                        @Html.DisplayFor(model => model.users.PhoneNUmber)
+                    </dd>
+                    <dt class="col-sm-2 infohead">
+                        Codeforces :
+                    </dt>
+                    <dd class="col-sm-10 info">
+                        @Html.DisplayFor(model => model.users.CfId)
+                    </dd>
+                    <dt class="col-sm-2 infohead">
+                        LightOj :
+                    </dt>
+                    <dd class="col-sm-10 info" >
+                        @Html.DisplayFor(model => model.users.LightOjId)
+                    </dd>
+                    <dt class="col-sm-2 infohead">
+                        CodeChef :
+                    </dt>
+                    <dd class="col-sm-10 info">
+                        @Html.DisplayFor(model => model.users.CodechefId)
+                    </dd>
+                </dl>
+                        <div style="display: flex; justify-content: flex-end; margin-top:100px;">
+                            <a style="text-decoration: none;" class="btn2 btn2up" asp-action="Edit" asp-route-id="@Model.users.UserId">Update Profile</a> 
+                            <!-- a asp-action="Index">Back to List</a -->
+                        </div>
+
+            </div>
+        </div>
+        <div class="procard">
+
+            <div class="prolog-box">
+                <div class="procardfront">
+                    @if (ViewData["ImageData"] != null)
+                    {
+                        <img class="propic" src="@ViewBag.ImageData" />
+                        @* <div style=" background-color: darkgrey;width: 300px; padding: 1rem;">
+                            <img style="width: 100%;height: 270px; object-fit: contain;" src="@ViewBag.ImageData" alt="" />
+                            </div> *@
+                    }
+                    @* <img class="propic" src="~/Images/aboutimg1.jpg" /> *@
+                    <p class="proname"> @Html.DisplayFor(model => model.users.Name)</p>
+                </div>
+        
+
+
+            </div>
+
+
+        </div>
+    </div>
 </div>
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.UserId">Update Profile</a> |
-    <!-- a asp-action="Index">Back to List</a -->
+
+<div style="margin-top: 40px;">
+<h3 class="textstylei">Problems Added By Me</h3>
+<table class ="tableclass" style="width: 900px; height:auto;">
+    <tr>
+        <th style="padding: 15px">
+            Problem Name
+        </th>
+        <th style="padding: 15px">
+            Tag
+        </th>
+        <th style="padding: 15px">
+           Hint
+        </th>
+        <th style="padding: 15px">
+           Added By
+        </th>
+        <th style="padding: 15px">
+           Link
+        </th>
+         <th style="padding: 15px">
+          
+        </th>
+    </tr>
+
+    @if(Model.AddProblems.Count()==0)
+    {
+        <h4>No problems found.</h4>
+    }
+    else
+    {
+        foreach(var item in Model.AddProblems)
+        {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PTag)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PIdea)
+                        </td>
+                        <td>
+                           @Html.DisplayFor(modelItem => item.PAddedBy)
+                        </td>
+                        <td>
+                            <a href="@Html.DisplayFor(modelItem => item.PLink)" > Try to solve</a>
+                           
+                        </td>
+                        <td>
+                          <a asp-controller="AddProblem" asp-action="Delete" asp-route-id="@item.Pid">Delete</a>
+                        </td>
+                    </tr>
+        }
+    }
+
+</table>
+
+
 </div>
+    
+
+
+
+
+<div>
+    <div style="margin-top: 100px;"></div>
+<h4  class="textstylei">Resource Added By Me</h4>
+@if(Model.Resources !=null)
+{
+ 
+    <table class="tableclass" style="width: 800px;" >
+    <tr>
+        <th  style="padding: 15px"  >Topic</th>
+        <th  style="padding: 15px"  >Short Description</th>
+        <th  style="padding: 15px" >Added By</th>
+        <th  style="padding: 15px" >Details</th>
+        <th  style="padding: 15px"></th>
+
+    </tr>
+    @foreach (Resource ps in Model.Resources)
+    {
+        <tr >
+            <td>@ps.Topic</td>
+            <td>@ps.ShortDescription</td>
+            <td>@ps.AddedBy</td>
+            <td>
+                 <a asp-controller="Resource" asp-action="ResourceDetails" asp-route-id="@ps.RId">Details</a> |
+            </td>
+            <td>
+            |
+                <a asp-controller="Resource" asp-action="ResourceDelete" asp-route-id="@ps.RId">Delete</a>
+            </td>
+        </tr> 
+    }
+</table>
+
+}

@@ -4,41 +4,78 @@
     ViewData["Title"] = "Notice Details";
 }
 
-<h1>Notice Details</h1>
 
+@{
 
-<div>
-            
-    <!-- h4>Users</h4 -->
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ShortDescription)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ShortDescription)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Time)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Time)
-        </dd>
-    </dl>
-</div>
-<div>
-    <!-- a asp-action="Edit" asp-route-id="@Model.NId">Update Profile</a--> 
-    <a asp-action="Index">Back to List</a>
-</div>
+    string time_= Model.Time;
+    
+    //time_ = time_.Substring(0, time_.Length - 2);
+    DateTime oDate = Convert.ToDateTime(time_);
+    string result = string.Empty;
 
+    var timeSpan = DateTime.Now.Subtract(oDate);
 
+    if (timeSpan <= TimeSpan.FromSeconds(60))
+    {
+        result = string.Format("{0} seconds ago", timeSpan.Seconds);
+    }
+    else if (timeSpan <= TimeSpan.FromMinutes(60))
+    {
+        result = timeSpan.Minutes > 1 ?
+        String.Format("about {0} minutes ago", timeSpan.Minutes) :
+        "about a minute ago";
+    }
+    else if (timeSpan <= TimeSpan.FromHours(24))
+    {
+        result = timeSpan.Hours > 1 ?
+        String.Format("about {0} hours ago", timeSpan.Hours) :
+        "about an hour ago";
+    }
+    else if (timeSpan <= TimeSpan.FromDays(30))
+    {
+        result = timeSpan.Days > 1 ?
+        String.Format("about {0} days ago", timeSpan.Days) :
+        "yesterday";
+    }
+    else if (timeSpan <= TimeSpan.FromDays(365))
+    {
+        result = timeSpan.Days > 30 ?
+        String.Format("about {0} months ago", timeSpan.Days / 30) :
+        "about a month ago";
+    }
+    else
+    {
+        result = timeSpan.Days > 365 ?
+        String.Format("about {0} years ago", timeSpan.Days / 365) :
+        "about a year ago";
+    }
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    time_ = result;
+    
 }
+
+<div class="noticedetails">
+    @if(Model!=null)
+    {
+            <h3 class="noticehead">@Model.ShortDescription</h3>
+            
+            <p style="color:#a7c2cf ;">:@result</p>
+            <br>
+
+            <p style="color: white;">@Model.Description</p>
+    }
+    else
+    {
+        <p>Technical error. Try again</p>
+    }
+
+</div>
+
+<script type="text/javascript">
+    window.onload = function () {
+
+        
+
+        };
+
+</script>
