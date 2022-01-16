@@ -40,7 +40,7 @@ namespace MyWebApp.Controllers
         public AddProblemsDbContext _pContext;
         public ResourceDbContext _rContext;
 
-        public UsersController(AddProblemsDbContext pContext,ResourceDbContext rContext, UsersDbContext context, ImagesDbContext iContext)
+        public UsersController(AddProblemsDbContext pContext, ResourceDbContext rContext, UsersDbContext context, ImagesDbContext iContext)
         {
             // ViewData["curName"] = HttpContext.Session.GetString("curName");
             _context = context;
@@ -52,23 +52,23 @@ namespace MyWebApp.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            string cookieValueFromReq = Request.Cookies["curName"];  
+            string cookieValueFromReq = Request.Cookies["curName"];
             ViewData["curName"] = cookieValueFromReq;
             if (ViewData["curName"] == null)
             {
                 //Console.WriteLine("Calling the details");
                 return RedirectToAction("Index", "Home");
             }
-           // ViewData["curId"] = HttpContext.Session.GetInt32("curId");
+            // ViewData["curId"] = HttpContext.Session.GetInt32("curId");
             //ViewData["curId"]= helperClass.getUniqueId();
             return View(await _context._users.ToListAsync());
         }
 
         public async Task<IActionResult> Logout()
         {
-            Response.Cookies.Delete("curName");  
-           // HttpContext.Session.SetString("curName", "Arman");
-            //   return 
+            Response.Cookies.Delete("curName");
+            HttpContext.Session.SetString("curName", null);
+
             return RedirectToAction("Index", "Home");
 
         }
@@ -76,10 +76,21 @@ namespace MyWebApp.Controllers
         // GET: Users/Details/5
         public async Task<IActionResult> Details()
         {
-           
-            string cookieValueFromReq = Request.Cookies["curName"];  
-            ViewData["curName"] = cookieValueFromReq;
-             Console.WriteLine(ViewData["curName"]);
+
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
+            Console.WriteLine(ViewData["curName"]);
             //ViewData["curName"] = HttpContext.Session.GetString("curName");
             if (ViewData["curName"] == null)
             {
@@ -89,7 +100,7 @@ namespace MyWebApp.Controllers
 
             string user = ViewData["curName"].ToString();
 
-            if(user==null)
+            if (user == null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -111,11 +122,11 @@ namespace MyWebApp.Controllers
                 ViewBag.ImageData = imageDataURL;
             }
 
-             CollectionDataModel model = new CollectionDataModel();
-            var resource_ = await _rContext._Resource.Where(m=> m.AddedBy==user).ToListAsync();
+            CollectionDataModel model = new CollectionDataModel();
+            var resource_ = await _rContext._Resource.Where(m => m.AddedBy == user).ToListAsync();
 
             model.Resources = resource_;
-            var problem_ = await _pContext._addProblems.Where(m=> m.PAddedBy==user).ToListAsync();
+            var problem_ = await _pContext._addProblems.Where(m => m.PAddedBy == user).ToListAsync();
             model.AddProblems = problem_;
             model.users = users;
 
@@ -124,12 +135,23 @@ namespace MyWebApp.Controllers
             return View(model);
         }
 
-         public async Task<IActionResult> DetailsMember(int? id)
+        public async Task<IActionResult> DetailsMember(int? id)
         {
-           
-            string cookieValueFromReq = Request.Cookies["curName"];  
-            ViewData["curName"] = cookieValueFromReq;
-             Console.WriteLine(ViewData["curName"]);
+
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
+            Console.WriteLine(ViewData["curName"]);
             //ViewData["curName"] = HttpContext.Session.GetString("curName");
             if (ViewData["curName"] == null)
             {
@@ -139,7 +161,7 @@ namespace MyWebApp.Controllers
 
             string user = ViewData["curName"].ToString();
 
-            if(user==null)
+            if (user == null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -161,7 +183,7 @@ namespace MyWebApp.Controllers
                 ViewBag.ImageData = imageDataURL;
             }
 
-            
+
             return View(users);
         }
 
@@ -209,12 +231,15 @@ namespace MyWebApp.Controllers
                 // _context.Add(userlog);
                 await _context.SaveChangesAsync();
 
-                CookieOptions option = new CookieOptions();
-                option.Expires = DateTime.Now.AddSeconds(7200);
-                Response.Cookies.Append("curName", users.Name, option);
+                HttpContext.Session.SetString("curName", users.Name);
 
-                string cookieValueFromReq = Request.Cookies["curName"];  
-                 ViewData["curName"] = cookieValueFromReq;
+
+                //  CookieOptions option2 = new CookieOptions();
+                // option2.Expires = DateTime.Now.AddSeconds(3600);
+                // Response.Cookies.Append("curid", "1", option2);
+
+
+                ViewData["curName"] = users.Name;
 
                 // HttpContext.Session.SetInt32("curId", users.UserId);
                 // HttpContext.Session.SetString("curName", users.Name);
@@ -236,7 +261,7 @@ namespace MyWebApp.Controllers
         [ValidateAntiForgeryToken]
 
 
-        public async Task<IActionResult> Login([Bind("UserId,Name,Password")] Userlogin userlogin)
+        public async Task<IActionResult> Login([Bind("UserId,Name,Password,Remember")] Userlogin userlogin)
         {
             if (ModelState.IsValid)
             {
@@ -251,17 +276,22 @@ namespace MyWebApp.Controllers
                     return View();
                 }
                 Console.WriteLine("FOund");
-              
-                CookieOptions option = new CookieOptions();
-                option.Expires = DateTime.Now.AddSeconds(3600);
-                Response.Cookies.Append("curName", users.Name, option);
 
-                 CookieOptions option2 = new CookieOptions();
-                option2.Expires = DateTime.Now.AddSeconds(3600);
-                Response.Cookies.Append("curid", "1", option2);
+                if (userlogin.Remember == true)
+                {
+                    CookieOptions option = new CookieOptions();
+                    option.Expires = DateTime.Now.AddSeconds(86400);
+                    Response.Cookies.Append("curName", users.Name, option);
+                }
+                HttpContext.Session.SetString("curName", users.Name);
 
-                string cookieValueFromReq = Request.Cookies["curName"];  
-                ViewData["curName"] = cookieValueFromReq;
+
+                //  CookieOptions option2 = new CookieOptions();
+                // option2.Expires = DateTime.Now.AddSeconds(3600);
+                // Response.Cookies.Append("curid", "1", option2);
+
+
+                ViewData["curName"] = users.Name;
 
                 return RedirectToAction("Index", "Home");
 
@@ -287,7 +317,19 @@ namespace MyWebApp.Controllers
         // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -308,7 +350,19 @@ namespace MyWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("UserId, FullName,Email,PhoneNUmber,CfId,LightOjId,CodechefId")] UserEdit users, IFormFile files)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             if (id != users.UserId)
             {
                 return NotFound();
@@ -413,7 +467,19 @@ namespace MyWebApp.Controllers
         // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -434,6 +500,19 @@ namespace MyWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             var users = await _context._users.FindAsync(id);
             _context._users.Remove(users);
             await _context.SaveChangesAsync();

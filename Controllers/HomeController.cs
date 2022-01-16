@@ -127,8 +127,18 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
+             string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
 
-            ViewData["curName"] = Request.Cookies["curName"];
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else{
+
+                 ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
 
             var image_ = await _iContext.__images.ToListAsync();
 
@@ -201,7 +211,18 @@ namespace MyWebApp.Controllers
         public async Task<IActionResult> Notice()
         {
 
-            ViewData["curName"] = Request.Cookies["curName"];  
+             string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else{
+                
+                 ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             var noticeList = await _nContext._notices.ToListAsync();
             CollectionDataModel model = new CollectionDataModel();
             model.Notices = noticeList;
@@ -214,7 +235,18 @@ namespace MyWebApp.Controllers
         
          public async Task<IActionResult> NoticeDetails(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+              string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else{
+                
+                 ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
 
              var notice = await _nContext._notices.FindAsync(id);
             if (notice == null)
@@ -227,7 +259,18 @@ namespace MyWebApp.Controllers
 
         public IActionResult Privacy()
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+             string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else{
+                
+                 ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             return View();
         }
 

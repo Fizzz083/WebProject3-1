@@ -1,7 +1,7 @@
 @model MyWebApp.Models.CollectionDataModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Profile";
 }
 
 <h1 class="textstylei">My Profile</h1>
@@ -182,10 +182,10 @@
             <td>@ps.ShortDescription</td>
             <td>@ps.AddedBy</td>
             <td>
-                 <a asp-controller="Resource" asp-action="ResourceDetails" asp-route-id="@ps.RId">Details</a> |
+                 <a asp-controller="Resource" asp-action="ResourceDetails" asp-route-id="@ps.RId">Details</a> 
             </td>
             <td>
-            |
+            
                 <a asp-controller="Resource" asp-action="ResourceDelete" asp-route-id="@ps.RId">Delete</a>
             </td>
         </tr> 

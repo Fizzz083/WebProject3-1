@@ -26,8 +26,18 @@ namespace MyWebApp.Controllers
 
         public IActionResult Index()
         {
-            string cookieValueFromReq = Request.Cookies["curName"];  
-            ViewData["curName"] = cookieValueFromReq;
+                        string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else{
+                
+                 ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             
             var url = "https://codeforces.com/api/contest.list?gym=false";
 
@@ -66,6 +76,18 @@ namespace MyWebApp.Controllers
 
         public IActionResult error_()
         {
+                         string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else{
+                
+                 ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             return View();
         }
 

@@ -51,8 +51,8 @@ namespace MyWebApp.Controllers
         {
             //int ret = 0;
 
-            
-            var url = "https://codeforces.com/api/user.info?handles="+cfid_;
+
+            var url = "https://codeforces.com/api/user.info?handles=" + cfid_;
 
 
             try
@@ -71,7 +71,7 @@ namespace MyWebApp.Controllers
 
 
                     //ViewBag.m = con.result[1].id - 
-                   // Console.WriteLine(a.Count);
+                    // Console.WriteLine(a.Count);
                     return r;
 
                 }
@@ -85,7 +85,7 @@ namespace MyWebApp.Controllers
             {
                 return -1;
             }
-            
+
 
             //return ret;
         }
@@ -94,7 +94,19 @@ namespace MyWebApp.Controllers
         public async Task<IActionResult> Index()
         {
 
-            ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             CollectionDataModel model = new CollectionDataModel();
 
             var teachers_ = await _tContext._teachers.ToListAsync();

@@ -41,8 +41,18 @@ namespace MyWebApp.Controllers
             int sizee = 0;
                 if(size!=null)
                 sizee = (int)size;
-            string cookieValueFromReq = Request.Cookies["curName"];
-            ViewData["curName"] = cookieValueFromReq;
+             string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else{
+                
+                 ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             ViewData["size"] = 0;
             ViewData["done"] = 0;
             ViewData["extra"] = 0;
@@ -100,9 +110,18 @@ namespace MyWebApp.Controllers
         public String uname;
         public IActionResult Create()
         {
+ string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
 
-            string cookieValueFromReq = Request.Cookies["curName"];
-            ViewData["curName"] = cookieValueFromReq;
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else{
+                
+                 ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             if(cookieValueFromReq==null)
             {
                 return RedirectToAction(nameof(Index));
@@ -118,7 +137,17 @@ namespace MyWebApp.Controllers
             if (ModelState.IsValid)
             {
                 string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
                 ViewData["curName"] = cookieValueFromReq;
+            }
+            else{
+                
+                 ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
                 problem.PAddedBy = cookieValueFromReq;
 
                 if (problem.PAddedBy == null)
@@ -138,13 +167,35 @@ namespace MyWebApp.Controllers
 
         public IActionResult Error()
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+             string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else{
+                
+                 ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             return View();
         }
 
         public async Task<IActionResult> Delete(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+             string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else{
+                
+                 ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -165,6 +216,18 @@ namespace MyWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+             string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else{
+                
+                 ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             var problem = await _pContext._addProblems.FindAsync(id);
             _pContext._addProblems.Remove(problem);
             await _pContext.SaveChangesAsync();

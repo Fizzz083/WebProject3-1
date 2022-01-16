@@ -45,7 +45,19 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             CollectionDataModel model = new CollectionDataModel();
             var resource_ = await _rContext._Resource.ToListAsync();
             model.Resources = resource_;
@@ -55,9 +67,20 @@ namespace MyWebApp.Controllers
         public IActionResult AddResource()
         {
             string cookieValueFromReq = Request.Cookies["curName"];
-            ViewData["curName"] = cookieValueFromReq;
-            
-            if(cookieValueFromReq==null)
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
+
+            if (cookieValueFromReq == null)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -69,10 +92,22 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> AddResource([Bind("RId,ShortDescription,Description,AddedBy,Topic,Datafiles")] Resource resource, IFormFile files)
         {
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             if (ModelState.IsValid)
             {
-                 string cookieValueFromReq = Request.Cookies["curName"];
-
+               
                 resource.AddedBy = cookieValueFromReq;
 
                 if (files != null)
@@ -97,10 +132,10 @@ namespace MyWebApp.Controllers
                             objfiles.Datafiles = target.ToArray();
                         }
 
-                        
-                            _rContext._Resource.Add(objfiles);
-                            _rContext.SaveChanges();
-                        
+
+                        _rContext._Resource.Add(objfiles);
+                        _rContext.SaveChanges();
+
 
 
                         Console.WriteLine("file Uploaded..");
@@ -108,9 +143,9 @@ namespace MyWebApp.Controllers
                 }
                 else
                 {
-                     _rContext._Resource.Add(resource);
+                    _rContext._Resource.Add(resource);
                     _rContext.SaveChanges();
-                    
+
                     Console.WriteLine("Not Found any files....");
                 }
 
@@ -129,7 +164,19 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> ResourceDelete(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -151,7 +198,19 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> ResourceDelete(int id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
 
 
             Console.WriteLine("deleting Resource...");
@@ -165,10 +224,22 @@ namespace MyWebApp.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
-        
+
         public async Task<IActionResult> ResourceDetails(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             var resource = await _rContext._Resource
                 .FirstOrDefaultAsync(m => m.RId == id);
             if (resource == null)

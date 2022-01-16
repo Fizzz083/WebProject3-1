@@ -19,6 +19,8 @@ namespace MyWebApp.Models
 
         [StringLength(20)]
         public string Password{get;set;}
+        public bool Remember{get;set;}
+
 
     }
     public class UserEdit

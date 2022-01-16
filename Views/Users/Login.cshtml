@@ -35,6 +35,11 @@
                 <input class="input-box" placeholder="password" type="password" asp-for="Password" class="form-control" /><br>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
+            <div>
+                <label>
+                    @Html.CheckBox("Remember",false) Remember Me
+                </label>
+            </div>
             <div >
                 <input class="logbutton" type="submit" value="Login" class="btn btn-primary" />
             </div>

@@ -22,7 +22,7 @@ namespace MyWebApp.Controllers
 {
     public class AdminController : Controller
     {
-        
+
         public UsersDbContext _context;
         public ImagesDbContext _iContext;
         public TeacherInfoDbContext _tContext;
@@ -43,12 +43,23 @@ namespace MyWebApp.Controllers
         }
 
 
-        
+
 
         public async Task<IActionResult> Index()
         {
-            string cookieValueFromReq = Request.Cookies["curName"];  
-            ViewData["curName"] = cookieValueFromReq;
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
 
             Console.Write("admin user: ");
             Console.WriteLine(ViewData["curName"]);
@@ -57,7 +68,7 @@ namespace MyWebApp.Controllers
             string curname = cookieValueFromReq;
 
 
-            if(String.Compare(curname, un)!=0)
+            if (String.Compare(curname, un) != 0)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -67,20 +78,20 @@ namespace MyWebApp.Controllers
             var teams_ = await _teContext._teams.ToListAsync();
             var archive__ = await _aContext._archives.ToListAsync();
 
-          //  var homeimage = "homeImage";
+            //  var homeimage = "homeImage";
 
             //var images_ =  _iContext.__images.Where(y => y.ImageName.Contains(homeimage)).ToList();
 
-            
+
 
             var images_ = await _iContext.__images.ToListAsync();
 
-           CollectionDataModel model = new CollectionDataModel();
-           model.Teachers = teachers_;
-           model.Notices = notices_;
-           model.Teams = teams_;
-           model.Archives =archive__;
-           model.Images = images_;
+            CollectionDataModel model = new CollectionDataModel();
+            model.Teachers = teachers_;
+            model.Notices = notices_;
+            model.Teams = teams_;
+            model.Archives = archive__;
+            model.Images = images_;
             return View(model);
         }
 
@@ -95,7 +106,18 @@ namespace MyWebApp.Controllers
         public IActionResult AddTeacher()
         {
             string cookieValueFromReq = Request.Cookies["curName"];
-            ViewData["curName"] = cookieValueFromReq;
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             return View();
         }
 
@@ -104,13 +126,26 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> AddTeacher([Bind("Id,Name,FullName,Email,PhoneNumber")] Teacher teacher)
         {
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             if (ModelState.IsValid)
             {
 
                 var users_ = await _context._users
                 .FirstOrDefaultAsync(m => m.Name == teacher.Name);
 
-                var teachercheck  = await _tContext._teachers
+                var teachercheck = await _tContext._teachers
                 .FirstOrDefaultAsync(m => m.Name == teacher.Name);
                 if (users_ != null || teachercheck != null)
                 {
@@ -123,7 +158,7 @@ namespace MyWebApp.Controllers
 
                 Console.WriteLine(teacher.PhoneNUmber);
 
-                 _tContext.Add(teacher);
+                _tContext.Add(teacher);
                 await _tContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -135,7 +170,19 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> TeacherDelete(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -157,6 +204,19 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> TeacherDelete(int id)
         {
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
 
             Console.WriteLine("deleting teacher...");
             var users = await _tContext._teachers.FindAsync(id);
@@ -169,10 +229,22 @@ namespace MyWebApp.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
-        
+
         public async Task<IActionResult> TeacherDetails(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             var teacher = await _tContext._teachers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (teacher == null)
@@ -195,7 +267,19 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> TeacherEdit(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             //ViewData["curName"] = HttpContext.Session.GetString("curName");
             if (id == null)
             {
@@ -217,6 +301,19 @@ namespace MyWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> TeacherEdit(int id, [Bind("Id,Name,FullName,Email,PhoneNUmber")] Teacher users, IFormFile files)
         {
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             Console.WriteLine("teacher edit..");
             if (id != users.Id)
             {
@@ -224,7 +321,7 @@ namespace MyWebApp.Controllers
             }
 
             var teacher = await _tContext._teachers.FindAsync(id);
-            
+
             teacher.Email = users.Email;
             teacher.PhoneNUmber = users.PhoneNUmber;
             teacher.FullName = users.FullName;
@@ -263,7 +360,7 @@ namespace MyWebApp.Controllers
                         }
                         catch (DbUpdateConcurrencyException)
                         {
-                           // Console.WriteLine("Update images failes");
+                            // Console.WriteLine("Update images failes");
                             throw;
                         }
                     }
@@ -292,7 +389,7 @@ namespace MyWebApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (teacher==null)
+                    if (teacher == null)
                     {
                         return NotFound();
                     }
@@ -307,7 +404,7 @@ namespace MyWebApp.Controllers
             return View(users);
         }
 
-         /* Teacher - End */
+        /* Teacher - End */
 
 
 
@@ -321,17 +418,28 @@ namespace MyWebApp.Controllers
 
 
 
-         
 
 
-         /* Notice */
+
+        /* Notice */
         public IActionResult AddNotice()
         {
             string cookieValueFromReq = Request.Cookies["curName"];
-            ViewData["curName"] = cookieValueFromReq;
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
 
 
-            
+
             return View();
         }
 
@@ -340,14 +448,27 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> AddNotice([Bind("NId,,ShortDescription,Description,Time")] Notice notice)
         {
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             if (ModelState.IsValid)
             {
 
-                DateTime now = DateTime.Now; 
+                DateTime now = DateTime.Now;
 
-                notice.Time  = now.ToString();
+                notice.Time = now.ToString();
 
-                 _nContext.Add(notice);
+                _nContext.Add(notice);
                 await _nContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -359,7 +480,19 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> NoticeDelete(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -381,7 +514,19 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> NoticeDelete(int id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
 
             Console.WriteLine("deleting teacher...");
             var notice = await _nContext._notices
@@ -395,10 +540,22 @@ namespace MyWebApp.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
-        
+
         public async Task<IActionResult> NoticeDetails(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             var notice = await _nContext._notices
                 .FirstOrDefaultAsync(m => m.NId == id);
             if (notice == null)
@@ -421,15 +578,27 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> NoticeEdit(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             //ViewData["curName"] = HttpContext.Session.GetString("curName");
             if (id == null)
             {
                 return NotFound();
             }
 
-           var notice = await _nContext._notices
-                .FirstOrDefaultAsync(m => m.NId == id);
+            var notice = await _nContext._notices
+                 .FirstOrDefaultAsync(m => m.NId == id);
             if (notice == null)
             {
                 return NotFound();
@@ -444,7 +613,19 @@ namespace MyWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> NoticeEdit(int id, [Bind("NId,ShortDescription,Description,Time")] Notice notice)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             Console.WriteLine("teacher edit..");
             if (id != notice.NId)
             {
@@ -452,12 +633,12 @@ namespace MyWebApp.Controllers
             }
 
             var notice_ = await _nContext._notices.FindAsync(id);
-           
+
 
             notice_.ShortDescription = notice.ShortDescription;
             notice_.Description = notice.Description;
 
-            
+
 
             if (ModelState.IsValid)
             {
@@ -469,7 +650,7 @@ namespace MyWebApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (notice_==null)
+                    if (notice_ == null)
                     {
                         return NotFound();
                     }
@@ -484,7 +665,7 @@ namespace MyWebApp.Controllers
             return View(notice_);
         }
 
-         /* Notice - End */
+        /* Notice - End */
 
 
 
@@ -508,10 +689,20 @@ namespace MyWebApp.Controllers
         public IActionResult AddTeam()
         {
             string cookieValueFromReq = Request.Cookies["curName"];
-            ViewData["curName"] = cookieValueFromReq;
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
 
 
-            
             return View();
         }
 
@@ -520,11 +711,24 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> AddTeam([Bind("TId,TeamName,Member1,Member2,Member3,Email,Phonenumber")] Team team)
         {
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             if (ModelState.IsValid)
             {
 
-                
-                 _teContext.Add(team);
+
+                _teContext.Add(team);
                 await _teContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -536,7 +740,19 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> TeamDelete(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -558,7 +774,19 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> TeamDelete(int id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
 
             Console.WriteLine("deleting Team...");
             var team_ = await _teContext._teams
@@ -572,15 +800,27 @@ namespace MyWebApp.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
-        
+
         public async Task<IActionResult> TeamDetails(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             var team_ = await _teContext._teams
                 .FirstOrDefaultAsync(m => m.TId == id);
             if (team_ == null)
             {
-               // Console.Write("Not Founded Notice for showing the details..");
+                // Console.Write("Not Founded Notice for showing the details..");
                 return NotFound();
             }
 
@@ -598,7 +838,19 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> TeamEdit(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             //ViewData["curName"] = HttpContext.Session.GetString("curName");
             if (id == null)
             {
@@ -621,15 +873,27 @@ namespace MyWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> TeamEdit(int id, [Bind("TId,TeamName,Member1,Member2,Member3,Email,Phonenumber")] Team team)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             Console.WriteLine("teacher edit..");
             if (id != team.TId)
             {
                 return NotFound();
             }
 
-             var team_ = await _teContext._teams
-                .FirstOrDefaultAsync(m => m.TId == id);
+            var team_ = await _teContext._teams
+               .FirstOrDefaultAsync(m => m.TId == id);
 
             team_.TeamName = team.TeamName;
             team_.Member1 = team.Member1;
@@ -637,14 +901,14 @@ namespace MyWebApp.Controllers
             team_.Member3 = team.Member3;
             team_.Email = team.Email;
             team_.Phonenumber = team.Phonenumber;
-            
-            
-           
+
+
+
 
             // notice_.ShortDescription = notice.ShortDescription;
             // notice_.Description = notice.Description;
 
-            
+
 
             if (ModelState.IsValid)
             {
@@ -656,7 +920,7 @@ namespace MyWebApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (team_==null)
+                    if (team_ == null)
                     {
                         return NotFound();
                     }
@@ -670,7 +934,7 @@ namespace MyWebApp.Controllers
             }
             return View(team_);
         }
-       
+
 
         /* .... end - Team .... */
 
@@ -690,11 +954,22 @@ namespace MyWebApp.Controllers
 
 
 
-         /* Archive */
+        /* Archive */
         public IActionResult AddArchive()
         {
             string cookieValueFromReq = Request.Cookies["curName"];
-            ViewData["curName"] = cookieValueFromReq;
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             return View();
         }
 
@@ -703,15 +978,28 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> AddArchive([Bind("AId,TeamName,Member1,Member2,Member3,ContestName,Year,Position")] Archive archive)
         {
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             if (ModelState.IsValid)
             {
 
                 // var archive_ = await _aContext._archives
                 // .FirstOrDefaultAsync(m => m.TeamName == archive.TeamName);
 
-                
 
-                 _aContext.Add(archive);
+
+                _aContext.Add(archive);
                 await _aContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -723,7 +1011,19 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> ArchiveDelete(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -746,7 +1046,19 @@ namespace MyWebApp.Controllers
         public async Task<IActionResult> ArchiveDelete(int id)
         {
 
-            Console.WriteLine("deleting teacher...");
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             var archive_ = await _aContext._archives
                  .FirstOrDefaultAsync(m => m.AId == id);
 
@@ -758,10 +1070,22 @@ namespace MyWebApp.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
-        
+
         public async Task<IActionResult> ArchiveDetails(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             var archive_ = await _aContext._archives
                  .FirstOrDefaultAsync(m => m.AId == id);
             if (archive_ == null)
@@ -770,22 +1094,22 @@ namespace MyWebApp.Controllers
                 return NotFound();
             }
 
-            
+
             Console.Write("Founded Teacher for showing the details..");
             return View(archive_);
         }
 
         public async Task<IActionResult> ArchiveEdit(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            ViewData["curName"] = Request.Cookies["curName"];
             //ViewData["curName"] = HttpContext.Session.GetString("curName");
             if (id == null)
             {
                 return NotFound();
             }
 
-           var archive_ = await _aContext._archives
-                 .FirstOrDefaultAsync(m => m.AId == id);
+            var archive_ = await _aContext._archives
+                  .FirstOrDefaultAsync(m => m.AId == id);
             if (archive_ == null)
             {
                 return NotFound();
@@ -800,7 +1124,19 @@ namespace MyWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ArchiveEdit(int id, [Bind("AId,TeamName,Member1,Member2,Member3,ContestName,Year,Position")] Archive archive)
         {
-            Console.WriteLine("teacher edit..");
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             if (id != archive.AId)
             {
                 return NotFound();
@@ -829,7 +1165,7 @@ namespace MyWebApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (archive_==null)
+                    if (archive_ == null)
                     {
                         return NotFound();
                     }
@@ -844,7 +1180,7 @@ namespace MyWebApp.Controllers
             return View(archive_);
         }
 
-         /* Archive - End */
+        /* Archive - End */
 
 
 
@@ -862,7 +1198,18 @@ namespace MyWebApp.Controllers
         public IActionResult AddHomeImage()
         {
             string cookieValueFromReq = Request.Cookies["curName"];
-            ViewData["curName"] = cookieValueFromReq;
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             return View();
         }
 
@@ -871,6 +1218,19 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> AddHomeImage(IFormFile files)
         {
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             if (ModelState.IsValid)
             {
 
@@ -878,39 +1238,39 @@ namespace MyWebApp.Controllers
                 // .FirstOrDefaultAsync(m => m.TeamName == archive.TeamName);
 
                 if (files != null)
-            {
-                Console.WriteLine("getting Image");
-                if (files.Length > 0)
                 {
-                    var str = "homeimage";
-                    var fileName = Path.GetFileName(files.FileName);
-                    var filext = Path.GetExtension(fileName);
-                    var newFileName = String.Concat(str, filext);
-                    var objfiles = new ImageUp()
+                    Console.WriteLine("getting Image");
+                    if (files.Length > 0)
                     {
-                        ImageId = 0,
-                        ImageName = str
-                    };
-                    using (var target = new MemoryStream())
-                    {
-                        files.CopyTo(target);
-                        objfiles.Datafiles = target.ToArray();
-                    }
+                        var str = "homeimage";
+                        var fileName = Path.GetFileName(files.FileName);
+                        var filext = Path.GetExtension(fileName);
+                        var newFileName = String.Concat(str, filext);
+                        var objfiles = new ImageUp()
+                        {
+                            ImageId = 0,
+                            ImageName = str
+                        };
+                        using (var target = new MemoryStream())
+                        {
+                            files.CopyTo(target);
+                            objfiles.Datafiles = target.ToArray();
+                        }
 
-                    
+
 
                         _iContext.__images.Add(objfiles);
                         _iContext.SaveChanges();
-                    
-                    Console.WriteLine("Image Uploaded..");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Not Found Images....");
-            }
 
-                
+                        Console.WriteLine("Image Uploaded..");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Not Found Images....");
+                }
+
+
 
                 //  _aContext.Add(archive);
                 // await _aContext.SaveChangesAsync();
@@ -924,7 +1284,19 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> HomeImageDelete(int? id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -946,7 +1318,19 @@ namespace MyWebApp.Controllers
 
         public async Task<IActionResult> HomeImageDelete(int id)
         {
-             ViewData["curName"] = Request.Cookies["curName"];
+            string cookieValueFromReq = Request.Cookies["curName"];
+            //ViewData["curName"] = cookieValueFromReq;
+
+            if (cookieValueFromReq != null)
+            {
+
+                ViewData["curName"] = cookieValueFromReq;
+            }
+            else
+            {
+
+                ViewData["curName"] = HttpContext.Session.GetString("curName");
+            }
 
             Console.WriteLine("deleting image...");
             var image_ = await _iContext.__images
@@ -960,9 +1344,9 @@ namespace MyWebApp.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
-        
 
 
-         /* home image  end*/
+
+        /* home image  end*/
     }
 }
