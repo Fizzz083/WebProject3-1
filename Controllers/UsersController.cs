@@ -67,7 +67,7 @@ namespace MyWebApp.Controllers
         public async Task<IActionResult> Logout()
         {
             Response.Cookies.Delete("curName");
-            HttpContext.Session.SetString("curName", null);
+            HttpContext.Session.Clear();
 
             return RedirectToAction("Index", "Home");
 
