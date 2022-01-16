@@ -6,6 +6,11 @@
 
 
 $(function () {
+    var point = document.getElementById("forcheck");
+    if(point=="0")
+    {
+        return;
+    }
     var slideIndex = 0;
     showSlides();
 

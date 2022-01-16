@@ -13,6 +13,12 @@ using System.Text;
 using System.IO;
 using X.PagedList;
 using X.PagedList.Mvc;
+using X.PagedList.Mvc.Core;
+using X.PagedList.Mvc.Common;
+using System.Web;
+// using PagedList.Mvc;
+// using PagedList;
+// using PagedList.Core.Mvc;
 
 namespace MyWebApp.Controllers
 {
@@ -28,23 +34,67 @@ namespace MyWebApp.Controllers
             _pContext = pContext;
         }
 
-        public async Task<IActionResult> Index(int? i)
+
+        public async Task<IActionResult> Index(int? i, int? size)
         {
+            //var size_ = (string)size;
+            int sizee = 0;
+                if(size!=null)
+                sizee = (int)size;
             string cookieValueFromReq = Request.Cookies["curName"];
             ViewData["curName"] = cookieValueFromReq;
+            ViewData["size"] = 0;
+            ViewData["done"] = 0;
+            ViewData["extra"] = 0;
+
+            Console.WriteLine(size);
+            Console.WriteLine(sizee);
+             
+
 
             var problems = await _pContext._addProblems.ToListAsync();
+            var confirm_list = new List<AddProblem>() ;
+
+
+            if(i==1)
+            {
+                 var s = sizee;
+                confirm_list = problems.GetRange(s, 5);
+                sizee = s+5;
+
+            }
+            else if(i==2)
+            {
+                var s = Math.Min(sizee+5,problems.Count);
+                var rase = Math.Min(5,problems.Count-sizee );
+                
+                
+                confirm_list = problems.GetRange(sizee, rase);
+                Console.WriteLine("size: "+s);
+                sizee = s;
+                if(s==problems.Count)
+                {
+                     ViewData["done"] = 1;
+                     ViewData["extra"] = rase;
+                   //  sizee=0;
+                }
+            }
+            else{
+
+                //var s = Math.Min(sizee+5,problems.Count);
+                var rase = Math.Min(5,problems.Count );
+                Console.WriteLine("size: "+rase);
+                confirm_list = problems.GetRange(0, rase);
+                sizee = rase;
+               
+            }
+             ViewData["size"] = sizee;
+              Console.WriteLine(sizee);
 
             //IPagedList<AddProblem> pagedList = problems.ToPagedList(i ?? 1, 3);
-
-            var models = problems.ToPagedList(i ?? 1,3);
-
-            Console.WriteLine(i);
    
 
-            // IPagedList<AddProblem> models = new IPagedList<AddProblem>(problems, i ?? 1, 2);
-
-            return View(models);
+            return View(confirm_list);
         }
 
         public String uname;

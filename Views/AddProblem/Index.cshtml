@@ -1,18 +1,19 @@
-@model X.PagedList.IPagedList<MyWebApp.Models.AddProblem>
+@model List<MyWebApp.Models.AddProblem>
 
 @{
     ViewData["Title"] = "Added Problems";
 }
 
-@using X.PagedList;
+@* @using X.PagedList;
 @using X.PagedList.Mvc.Core;
-@using X.PagedList.Web.Common;
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
+@using X.PagedList.Mvc.Common;
+@* @using PagedList.Web.Common; *@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers; *@
 
 
-<div>
-<h3>Problems</h3>
-<table class ="table">
+<div style="margin-top: 40px;">
+<h3 class="textstylei">Problems</h3>
+<table class ="tableclass">
     <tr>
         <th>
             Problem Name
@@ -63,23 +64,71 @@
 
 <br/>
 
-<div>
-@Html.PagedListPager(Model, i => Url.Action("Index", "AddProblem", 
-        new { i }),
-        new PagedListRenderOptions  
+@* 
+<!--div style="display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;" >
+    @Html.PagedListPager((IPagedList)Model, i => Url.Action("Index","AddProblem", new { i = i }),
+        new PagedListRenderOptions
         {
-            LiElementClasses = new string[] { "page-item" },
-            PageClasses = new string[] { "page-link" }
+           DisplayLinkToIndividualPages = true,
+                        DisplayPageCountAndCurrentLocation = false,
+                        MaximumPageNumbersToDisplay = 10,
+                        LiElementClasses = new string[] { "page-item" },
+                   PageClasses = new string[] { "page-link" },
+        })
+</div --> *@
+
+<div class="paging">
+        @{
+            //string s = (string)ViewData["size"];
+            int si = (int)ViewData["size"];
+
         }
-        )
+
+    <div class="pagingbutton">
+
+            @if (si > 5)
+            {
+
+                @if ((int)ViewData["extra"] != 0)
+                {
+                    si = si - (int)ViewData["extra"];
+                }
+
+                {
+
+                    si = si - 5;
+                }
+
+            <a class="pagingbutton" asp-area="" asp-controller="AddProblem" asp-action="Index" asp-route-i=1
+            asp-route-size="@si">Previous</a>
+            }
+            else
+            {
+            <p class="pagingbuttonoff">Previous</p>
+
+            }
+    </div>
+    <div style="margin-left: 10px;"></div>
+    <div class="pagingbutton">
+            @if ((int)ViewData["done"] != 1)
+            {
+            <a asp-area="" asp-controller="AddProblem" asp-action="Index" asp-route-i=2 asp-route-size="@si">Next</a>
+            }
+            else
+            {
+            <p class="pagingbuttonoff">Next</p>
+            }
+    </div>
+
 </div>
 
-<!-- div >
-       @Html.PagedListPager(Model, i => Url.Action("Index", new { i=i}),X.PagedList.Web.Common.PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
-           new X.PagedList.Web.Common.AjaxOptions() {HttpMethod="GET",UpdateTargetId= "employee-grid" }))
-</div -->
+
+<div style="margin-left: 60px;height:40px;;">
+    <a class="btn2" style="text-decoration: none;color:black;"  asp-area="" asp-controller="AddProblem" asp-action="Create">Add problems</a>
 </div>
 
-<div>
- <a class="btn" asp-area="" asp-controller="AddProblem" asp-action="Create">add</a>
-</div>
+
+<p id="forcheck" style="display: none;">0</p>

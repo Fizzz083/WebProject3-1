@@ -1,0 +1,47 @@
+@model MyWebApp.Models.CollectionDataModel
+@{
+    ViewData["Title"] = "Notice Page";
+}
+
+
+<div class="tableheader">
+    <h3 class="noticehead" style="margin-top:40px;font-size:35px;text-align: center;">Notice</h3>
+</div>
+
+
+<div class="boxshadowi" style="margin-top: 20px;" >
+    <p>
+
+@if (Model.Notices != null)
+{
+        <div class="noticetable">
+                @* <!-- marquee direction="up" scrolldelay="1" onmouseover="this.stop();" onmouseout="this.start();" --> *@
+            <ul >
+
+                @foreach (Notice notice in Model.Notices)
+                {
+                    <a style="text-decoration: none;"  asp-action="NoticeDetails" asp-route-id="@notice.NId">
+                        <li id="noticetabletr" style="color:black; background-color: #d0ebf7;margin-right:20px;">
+
+                                <h6 style=" margin-top:10px; width:500px;height:40px;margin-left:30px; font-size:20px; font-weight:bold;color:black">@notice.ShortDescription</h6>
+                                <p style="width:auto;height:30px;;margin-top:-50px;margin-left:700px;font-weight:bold;color:black">@notice.Time</p>
+                                <p class="fixedword" style="height:auto; width:1000px; color: black; margin-left:30px;;margin-top:20px;">@notice.Description ...</p>
+
+                            @* <td>@notice.NId</td>
+                            <td>@notice.ShortDescription</td>
+                            <td>@notice.Description</td>
+                            <td>@notice.Time</td> *@
+
+                        </li>
+                        </a>
+                }
+            </ul>
+        </div>
+}
+else
+{
+                    <p>No Notice is added</p>
+}
+
+    </p>
+</div>

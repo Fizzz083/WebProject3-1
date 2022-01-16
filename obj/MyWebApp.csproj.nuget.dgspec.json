@@ -86,6 +86,14 @@
               "target": "Package",
               "version": "[3.1.2, )"
             },
+            "Pagedlist.Core": {
+              "target": "Package",
+              "version": "[1.17.4, )"
+            },
+            "Pagedlist.Core.Mvc": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
             "X.PagedList": {
               "target": "Package",
               "version": "[8.1.0, )"
@@ -97,6 +105,14 @@
             "X.PagedList.Mvc.Core": {
               "target": "Package",
               "version": "[8.1.0, )"
+            },
+            "pagedList": {
+              "target": "Package",
+              "version": "[1.17.0, )"
+            },
+            "pagedList.Mvc": {
+              "target": "Package",
+              "version": "[4.5.0, )"
             }
           },
           "imports": [

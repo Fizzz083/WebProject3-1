@@ -149,6 +149,10 @@ namespace MyWebApp.Controllers
                 // _context.Add(userlog);
                 await _context.SaveChangesAsync();
 
+                CookieOptions option = new CookieOptions();
+                option.Expires = DateTime.Now.AddSeconds(3600);
+                Response.Cookies.Append("curName", users.Name, option);
+
                 string cookieValueFromReq = Request.Cookies["curName"];  
                  ViewData["curName"] = cookieValueFromReq;
 
@@ -158,7 +162,7 @@ namespace MyWebApp.Controllers
                 // ViewData["curName"] = HttpContext.Session.GetString
                 // ("curName");
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             return View(users);
         }

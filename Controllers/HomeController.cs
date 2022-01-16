@@ -19,6 +19,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MyWebApp.Controllers
 {
+
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -115,6 +117,14 @@ namespace MyWebApp.Controllers
             _uContext = uContext;
         }
 
+        long ConvertToTimestamp(DateTime value)
+        {
+            
+
+            long epoch = (value.ToUniversalTime().Ticks - 621355968000000000) / 10000000;
+            return epoch;
+        }
+
         public async Task<IActionResult> Index()
         {
 
@@ -159,23 +169,24 @@ namespace MyWebApp.Controllers
                     }
                 }
 
+
             Console.WriteLine(problems_running.Count);
 
 
             problems_running.Sort(
                 delegate (publish_submission p1, publish_submission p2)
                 {
-                    return p1.time_.CompareTo(p2.time_);
+                    if( Convert.ToDateTime(p1.time_)<Convert.ToDateTime(p2.time_))
+                    {
+                        return 1;
+                    }
+                    else return 0;
                 }
             );
 
+            problems_running = problems_running.GetRange(0,Math.Min(20,(int)problems_running.Count));
 
-
-
-
-
-
-
+            
             var noticeList = await _nContext._notices.ToListAsync();
 
             CollectionDataModel model = new CollectionDataModel();
@@ -185,6 +196,32 @@ namespace MyWebApp.Controllers
 
 
             return View(model);
+        }
+
+        public async Task<IActionResult> Notice()
+        {
+
+            ViewData["curName"] = Request.Cookies["curName"];  
+            var noticeList = await _nContext._notices.ToListAsync();
+            CollectionDataModel model = new CollectionDataModel();
+            model.Notices = noticeList;
+
+            return View(model);
+        }
+
+        
+
+        
+         public async Task<IActionResult> NoticeDetails(int? id)
+        {
+
+             var notice = await _nContext._notices.FindAsync(id);
+            if (notice == null)
+            {
+                return NotFound();
+            }
+            return View(notice);
+
         }
 
         public IActionResult Privacy()

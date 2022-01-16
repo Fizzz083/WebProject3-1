@@ -4,54 +4,26 @@
     ViewData["Title"] = "resource Details";
 }
 
-<h1>Resource Details</h1>
-
+<h2 style="margin-top: 30px;" class="textstylei">  @Html.DisplayFor(model => model.ShortDescription)</h2>
 
 <div>
             
     <!-- h4>Users</h4 -->
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ShortDescription)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ShortDescription)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Topic)
-        </dt>
-        <dd class = "col-sm-10">
+    <dl class="row boxshadowi" style="color:white;margin-left:50px;">
+        
+        
+        
+        
+        <dd class = "col-sm-10" style="color:#93ff73;font-weight: bold;font-size:18px;">
             @Html.DisplayFor(model => model.Topic)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
+       
+        <dd class = "col-sm-10" style="margin-top:20px ;">
             @Html.DisplayFor(model => model.Description)
         </dd>
 
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Datafiles)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Datafiles)
-
-            @if(Model.Datafiles!=null)
-            {
-                <p>Not null</p>
-            }
-            else
-            {
-                <p> null</p>
-            }
-        </dd>
+       
         
     </dl>
 </div>

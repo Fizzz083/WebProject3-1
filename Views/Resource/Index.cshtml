@@ -6,11 +6,11 @@
 
 <div>
     
-<h4  style="text-align:center">Resource info</h4>
+<h4  class="textstylei">Resource info</h4>
 @if(Model.Resources !=null)
 {
  
-    <table >
+    <table class="tableclass" >
     <tr>
         <th  style="padding: 15px"  >Topic</th>
         <th  style="padding: 15px"  >Short Description</th>
@@ -36,6 +36,7 @@ else
     <p>Not found any resource</p>
 }
 
-<a asp-action="AddResource">Add new</a> |
+<div style="margin-left: 100px; height:auto;margin-top:20px;">
+<a class="btn2" style="text-decoration: none;color:black;" asp-action="AddResource">Add new</a>
 
 </div>

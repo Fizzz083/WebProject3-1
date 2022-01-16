@@ -1,24 +1,62 @@
 @model MyWebApp.Models.CollectionDataModel
 
 
-<div>
-    <h4 style="text-align:center">Teacher info</h4>
+
+
+<div style="margin-top: 100px;"></div>
+
+<div  class="boxshadowi" >
+    <h4 class="textstylei">Members</h4>
+    @if (Model.usersWithRating != null)
+    {
+
+        <table class="tableclass">
+            <tr>
+                <th style="padding: 15px">Name</th>
+                <th style="padding: 15px">Codeforces Id</th>
+                <th style="padding: 15px">Cf Rating</th>
+                <th style="padding: 15px">Email</th>
+            </tr>
+            @foreach (UserWithRating u in Model.usersWithRating)
+            {
+                <tr>
+                    <td>@u.users.FullName</td>
+                    <td>@u.users.CfId</td>
+                    <td>@u.rating</td>
+                    <td>@u.users.Email</td>
+                </tr>
+            }
+        </table>
+
+    }
+    else
+    {
+        <p>No User is added</p>
+    }
+</div>
+
+<hr class="rounded">
+
+<div style="margin-top: 100px;"></div>
+
+<div class="boxshadowi" >
+    <h4 class="textstylei">Coaches</h4>
     @if (Model.Teachers != null)
     {
 
-        <table>
+        <table class="tableclass">
             <tr>
-                <th style="padding: 15px">Id</th>
+                @* <th style="padding: 15px">Id</th> *@
                 <th style="padding: 15px">Name</th>
                 <th style="padding: 15px">Email</th>
             </tr>
             @foreach (Teacher teacher in Model.Teachers)
             {
                 <tr>
-                    <td>@teacher.Id</td>
+                    @* <td>@teacher.Id</td> *@
                     <td>@teacher.FullName</td>
                     <td>@teacher.Email</td>
-                    
+
                 </tr>
             }
         </table>
@@ -30,49 +68,16 @@
     }
 </div>
 
+<hr class="rounded">
 
+<div style="margin-top: 100px;"></div>
 
-
-
-
-<div>
-      <h4  style="text-align:center">Member info</h4>
-@if(Model.usersWithRating !=null)
-{
- 
-    <table >
-    <tr>
-        <th  style="padding: 15px"  >Name</th>
-        <th  style="padding: 15px"  >Codeforces Id</th>
-        <th  style="padding: 15px" >Cf Rating</th>
-        <th  style="padding: 15px" >Email</th>
-    </tr>
-    @foreach (UserWithRating u in Model.usersWithRating)
-    {
-        <tr>
-            <td>@u.users.FullName</td>
-            <td>@u.users.CfId</td>
-            <td>@u.rating</td>
-            <td>@u.users.Email</td>
-        </tr> 
-    }
-</table>
-
-}
-else
-{
-    <p>No User is added</p>
-}
-</div>
-
-
-
-<div>
-    <h4 style="text-align:center">Team info</h4>
+<div  class="boxshadowi" >
+    <h4 class="textstylei">Teams</h4>
     @if (Model.Teams != null)
     {
 
-        <table>
+        <table class="tableclass">
             <tr>
                 <th style="padding: 15px">Team Name</th>
                 <th style="padding: 15px">Member1</th>
@@ -97,15 +102,17 @@ else
     }
 </div>
 
+<hr class="rounded">
 
 
+<div style="margin-top: 100px;"></div>
 
-<div>
-    <h4 style="text-align:center">Archives</h4>
+<div  class="boxshadowi" >
+    <h4 class="textstylei">Achivements</h4>
     @if (Model.Archives != null)
     {
 
-        <table>
+        <table class="tableclass">
             <tr>
                 <th style="padding: 15px">Year</th>
                 <th style="padding: 15px">Position</th>
@@ -121,8 +128,8 @@ else
                     <td>@a.ContestName</td>
                     <td>@a.TeamName</td>
                     <td>
-                        @a.Member1 <br/>
-                        @a.Member2 <br/>
+                        @a.Member1 <br />
+                        @a.Member2 <br />
                         @a.Member3
                     </td>
                 </tr>
@@ -135,4 +142,3 @@ else
         <p>No archives is added</p>
     }
 </div>
-

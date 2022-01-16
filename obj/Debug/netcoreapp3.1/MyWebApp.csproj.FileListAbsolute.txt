@@ -399,3 +399,9 @@ E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\ClubInfo\Index.cshtml.g.cs
 E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Resource\AddResource.cshtml.g.cs
 E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Resource\Index.cshtml.g.cs
 E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Resource\ResourceDetails.cshtml.g.cs
+E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\Notice.cshtml.g.cs
+E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Home\NoticeDetails.cshtml.g.cs
+E:\MyWebApp\bin\Debug\netcoreapp3.1\PagedList.dll
+E:\MyWebApp\bin\Debug\netcoreapp3.1\PagedList.Mvc.dll
+E:\MyWebApp\bin\Debug\netcoreapp3.1\PagedList.Core.dll
+E:\MyWebApp\bin\Debug\netcoreapp3.1\PagedList.Core.Mvc.dll
