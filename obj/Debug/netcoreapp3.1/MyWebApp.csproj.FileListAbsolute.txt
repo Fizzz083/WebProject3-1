@@ -408,3 +408,4 @@ E:\MyWebApp\bin\Debug\netcoreapp3.1\PagedList.Core.Mvc.dll
 E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Resource\ResourceDelete.cshtml.g.cs
 E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\AddProblem\Delete.cshtml.g.cs
 E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Users\DetailsMember.cshtml.g.cs
+E:\MyWebApp\obj\Debug\netcoreapp3.1\Razor\Views\Users\Error.cshtml.g.cs

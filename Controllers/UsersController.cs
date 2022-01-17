@@ -95,7 +95,7 @@ namespace MyWebApp.Controllers
             if (ViewData["curName"] == null)
             {
                 Console.WriteLine("Calling the details");
-                return NotFound();
+               return RedirectToAction("Error","Users");
             }
 
             string user = ViewData["curName"].ToString();
@@ -110,7 +110,7 @@ namespace MyWebApp.Controllers
             if (users == null)
             {
                 Console.Write("Not Founded user for showing the details..");
-                return NotFound();
+                return RedirectToAction("Error","Users");
             }
 
             var img = await _iContext.__images.FirstOrDefaultAsync(m => m.ImageName == user);
@@ -156,7 +156,7 @@ namespace MyWebApp.Controllers
             if (ViewData["curName"] == null)
             {
                 Console.WriteLine("Calling the details");
-                return NotFound();
+                return RedirectToAction("Error","Users");
             }
 
             string user = ViewData["curName"].ToString();
@@ -186,6 +186,10 @@ namespace MyWebApp.Controllers
 
             return View(users);
         }
+        public IActionResult Error()
+        {
+            return View();
+        }
 
         // GET: Users/Create
         public IActionResult Create()
@@ -211,7 +215,11 @@ namespace MyWebApp.Controllers
 
                 var users_ = await _context._users
                 .FirstOrDefaultAsync(m => m.Name == users.Name);
-                if (users_ != null)
+                var eusrs_ = await _context._users
+                .FirstOrDefaultAsync(m => m.Email == users.Email);
+                
+
+                if (users_ != null || eusrs_!=null)
                 {
 
                     ViewBag.Found = "found";
@@ -332,7 +340,7 @@ namespace MyWebApp.Controllers
             }
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction("Error","Users");
             }
 
             var users = await _context._users.FindAsync(id);
@@ -365,7 +373,7 @@ namespace MyWebApp.Controllers
             }
             if (id != users.UserId)
             {
-                return NotFound();
+                return RedirectToAction("Error","Users");
             }
 
             var usersup = await _context._users.FindAsync(id);
@@ -449,7 +457,7 @@ namespace MyWebApp.Controllers
                 {
                     if (!UsersExists(users.UserId))
                     {
-                        return NotFound();
+                        return RedirectToAction("Error","Users");
                     }
                     else
                     {
@@ -482,14 +490,14 @@ namespace MyWebApp.Controllers
             }
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction("Error","Users");
             }
 
             var users = await _context._users
                 .FirstOrDefaultAsync(m => m.UserId == id);
             if (users == null)
             {
-                return NotFound();
+                return RedirectToAction("Error","Users");
             }
 
             return View(users);

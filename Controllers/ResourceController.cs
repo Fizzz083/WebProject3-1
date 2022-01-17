@@ -108,7 +108,7 @@ namespace MyWebApp.Controllers
             if (ModelState.IsValid)
             {
                
-                resource.AddedBy = cookieValueFromReq;
+                resource.AddedBy = (string)ViewData["curName"];
 
                 if (files != null)
                 {

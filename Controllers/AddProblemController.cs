@@ -148,11 +148,11 @@ namespace MyWebApp.Controllers
                 
                  ViewData["curName"] = HttpContext.Session.GetString("curName");
             }
-                problem.PAddedBy = cookieValueFromReq;
+                problem.PAddedBy = (string)ViewData["curName"] ;
 
                 if (problem.PAddedBy == null)
                 {
-                    return RedirectToAction("Error");
+                    return RedirectToAction("Error","Users");
                 }
                 _pContext.Add(problem);
                 await _pContext.SaveChangesAsync();
@@ -198,14 +198,14 @@ namespace MyWebApp.Controllers
             }
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction("Error","Users");
             }
 
             var problem = await _pContext._addProblems
                 .FirstOrDefaultAsync(m => m.Pid == id);
             if (problem == null)
             {
-                return NotFound();
+               return RedirectToAction("Error","Users");
             }
 
             return View(problem);
